@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="listerafDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="begenilenler">
+    <Key>
+      <PropertyRef Name="BeId" />
+    </Key>
+    <Property Name="BeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="imdb_id" Type="varchar" MaxLength="100" />
+    <Property Name="title" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="dahasonraizle">
+    <Key>
+      <PropertyRef Name="DSId" />
+    </Key>
+    <Property Name="DSId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="imdb_id" Type="varchar" MaxLength="100" />
+    <Property Name="title" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="FilmTop">
+    <Key>
+      <PropertyRef Name="TId" />
+    </Key>
+    <Property Name="TId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="imdb_id" Type="int" />
+    <Property Name="izlenme" Type="int" />
+    <Property Name="begenme" Type="nchar" MaxLength="10" />
+    <Property Name="dahasonraizle" Type="nchar" MaxLength="10" />
+    <Property Name="yorum" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="izlenenler">
+    <Key>
+      <PropertyRef Name="IzId" />
+    </Key>
+    <Property Name="IzId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="imdb_id" Type="varchar" MaxLength="100" />
+    <Property Name="title" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Roller">
+    <Key>
+      <PropertyRef Name="RolId" />
+    </Key>
+    <Property Name="RolId" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RolAd" Type="char" MaxLength="1" Nullable="false" />
+  </EntityType>
+  <EntityType Name="uDetay">
+    <Key>
+      <PropertyRef Name="DetId" />
+    </Key>
+    <Property Name="DetId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="topIzlenen" Type="int" />
+    <Property Name="topBegenilen" Type="int" />
+    <Property Name="topDahaSonraIzle" Type="int" />
+    <Property Name="topYorum" Type="int" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="RolId" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Yorumlar">
+    <Key>
+      <PropertyRef Name="YorumId" />
+    </Key>
+    <Property Name="YorumId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="imdb_id" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="YorumIcerik" Type="varchar(max)" />
+    <Property Name="YorumTarih" Type="datetime" />
+    <Property Name="durum" Type="bit" />
+  </EntityType>
+  <Association Name="FK__uDetay__UserId__3A4CA8FD">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="uDetay" Type="Self.uDetay" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="uDetay">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_begenilenler_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="begenilenler" Type="Self.begenilenler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="begenilenler">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dahasonraizle_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="dahasonraizle" Type="Self.dahasonraizle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="dahasonraizle">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_izlenenler_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+    <End Role="izlenenler" Type="Self.izlenenler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="izlenenler">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_Roller">
+    <End Role="Roller" Type="Self.Roller" Multiplicity="1" />
+    <End Role="Users" Type="Self.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roller">
+        <PropertyRef Name="RolId" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="RolId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Yorumlar_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Yorumlar" Type="Self.Yorumlar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Yorumlar">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="listerafDBModelStoreContainer">
+    <EntitySet Name="begenilenler" EntityType="Self.begenilenler" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="dahasonraizle" EntityType="Self.dahasonraizle" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FilmTop" EntityType="Self.FilmTop" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="izlenenler" EntityType="Self.izlenenler" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Roller" EntityType="Self.Roller" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="uDetay" EntityType="Self.uDetay" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Yorumlar" EntityType="Self.Yorumlar" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__uDetay__UserId__3A4CA8FD" Association="Self.FK__uDetay__UserId__3A4CA8FD">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="uDetay" EntitySet="uDetay" />
+    </AssociationSet>
+    <AssociationSet Name="FK_begenilenler_Users" Association="Self.FK_begenilenler_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="begenilenler" EntitySet="begenilenler" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dahasonraizle_Users" Association="Self.FK_dahasonraizle_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="dahasonraizle" EntitySet="dahasonraizle" />
+    </AssociationSet>
+    <AssociationSet Name="FK_izlenenler_Users" Association="Self.FK_izlenenler_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="izlenenler" EntitySet="izlenenler" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_Roller" Association="Self.FK_Users_Roller">
+      <End Role="Roller" EntitySet="Roller" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Yorumlar_Users" Association="Self.FK_Yorumlar_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Yorumlar" EntitySet="Yorumlar" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

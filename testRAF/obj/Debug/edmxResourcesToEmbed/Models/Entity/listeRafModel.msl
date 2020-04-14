@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="listerafDBModelStoreContainer" CdmEntityContainer="listerafDBEntities_1">
+    <EntitySetMapping Name="begenilenlers">
+      <EntityTypeMapping TypeName="listerafDBModel.begenilenler">
+        <MappingFragment StoreEntitySet="begenilenler">
+          <ScalarProperty Name="BeId" ColumnName="BeId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="imdb_id" ColumnName="imdb_id" />
+          <ScalarProperty Name="title" ColumnName="title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="dahasonraizles">
+      <EntityTypeMapping TypeName="listerafDBModel.dahasonraizle">
+        <MappingFragment StoreEntitySet="dahasonraizle">
+          <ScalarProperty Name="DSId" ColumnName="DSId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="imdb_id" ColumnName="imdb_id" />
+          <ScalarProperty Name="title" ColumnName="title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FilmTops">
+      <EntityTypeMapping TypeName="listerafDBModel.FilmTop">
+        <MappingFragment StoreEntitySet="FilmTop">
+          <ScalarProperty Name="TId" ColumnName="TId" />
+          <ScalarProperty Name="imdb_id" ColumnName="imdb_id" />
+          <ScalarProperty Name="izlenme" ColumnName="izlenme" />
+          <ScalarProperty Name="begenme" ColumnName="begenme" />
+          <ScalarProperty Name="dahasonraizle" ColumnName="dahasonraizle" />
+          <ScalarProperty Name="yorum" ColumnName="yorum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="izlenenlers">
+      <EntityTypeMapping TypeName="listerafDBModel.izlenenler">
+        <MappingFragment StoreEntitySet="izlenenler">
+          <ScalarProperty Name="IzId" ColumnName="IzId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="imdb_id" ColumnName="imdb_id" />
+          <ScalarProperty Name="title" ColumnName="title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="uDetays">
+      <EntityTypeMapping TypeName="listerafDBModel.uDetay">
+        <MappingFragment StoreEntitySet="uDetay">
+          <ScalarProperty Name="DetId" ColumnName="DetId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="topIzlenen" ColumnName="topIzlenen" />
+          <ScalarProperty Name="topBegenilen" ColumnName="topBegenilen" />
+          <ScalarProperty Name="topDahaSonraIzle" ColumnName="topDahaSonraIzle" />
+          <ScalarProperty Name="topYorum" ColumnName="topYorum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="listerafDBModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="RolId" ColumnName="RolId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Yorumlars">
+      <EntityTypeMapping TypeName="listerafDBModel.Yorumlar">
+        <MappingFragment StoreEntitySet="Yorumlar">
+          <ScalarProperty Name="YorumId" ColumnName="YorumId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="imdb_id" ColumnName="imdb_id" />
+          <ScalarProperty Name="YorumIcerik" ColumnName="YorumIcerik" />
+          <ScalarProperty Name="YorumTarih" ColumnName="YorumTarih" />
+          <ScalarProperty Name="durum" ColumnName="durum" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Rollers">
+      <EntityTypeMapping TypeName="listerafDBModel.Roller">
+        <MappingFragment StoreEntitySet="Roller">
+          <ScalarProperty Name="RolAd" ColumnName="RolAd" />
+          <ScalarProperty Name="RolId" ColumnName="RolId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,95 @@
+﻿@model IEnumerable<testRAF.Models.Entity.User>
+@{
+    ViewBag.Title = "Üyeler";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style>
+    .table-striped {
+        background: #ededed;
+    }
+
+        .table-striped > tbody > tr:nth-of-type(2n+1) {
+            background: #ccc;
+        }
+</style>
+
+<div class="modal fade small-modal" id="small-modal" tabindex="-1" role="dialog" aria-labelledby="small-modal-label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" data-border-top="multi">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="small-modal-label"></h4>
+            </div>
+            <div class="modal-body">
+                <p class="mesaj"></p>
+                <h1></h1>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">İptal</button>
+                <button type="button" class="btn btn-danger yorumSil">Evet</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<table class="table table-striped table-bordered text-center">
+    <thead>
+        <tr style="background:url('../src/img/admin/10.jpg') no-repeat;">
+            <td>UID</td>
+            <td>Kullanıcı Adı</td>
+            @*<td>Email</td>
+                <td>Şifre</td>*@
+            <td>Kayıt Tarihi</td>
+            <td>Rol</td>
+            <td>Güncelle</td>
+            <td>Sil</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var uye in Model)
+        {
+            <tr>
+                <td>@uye.UserId</td>
+                <td>@uye.UserName</td>
+                <td>@uye.CreatedOn</td>
+                <td>@uye.Roller.RolAd</td>
+
+                <td><a href="/Admin/uRol/@uye.UserId" class="btn btn-info rolGuncelle">Güncelle</a></td>
+                <td><a href="/Admin/uyeSil/@uye.UserId" class="btn btn-danger modalAc" data-username="@uye.UserName" data-id="@uye.UserId">Sil</a></td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+@section scripts{
+    <script>
+        $(function () {
+            //$(".modalAc").click(function () {
+            //    var username = $(this).data("username");
+            //    $(".modal-header h4").html("Yorum Sil");
+            //    $(".modal-body>p.mesaj").html(username + " adlı kullanıcı silinsin mi?");
+            //    var id = $(this).data("id");
+            //    $(".yorumSil").data("id", id);
+
+            //});
+            //$(".yorumSil").click(function () {
+            //    let id = $(this).data("id");
+            //    $.ajax({
+            //        type: "post",
+            //        url: "/Admin/uyeSil",
+            //        data: { id: id },
+            //        success: function (durum) {
+            //            if (durum == "true") {
+            //                window.location.replace("/Admin/Uyeler");
+            //            } else {
+            //                $(".modal-body>h1").html("Oooops hata :(");
+            //            }
+            //        }
+            //    });
+            //});
+        })
+    </script>
+}
+
+

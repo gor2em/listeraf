@@ -1,0 +1,49 @@
+﻿@model testRAF.Models.Entity.listeler
+@{
+    ViewBag.Title = "Listeler";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style>
+    div {
+        margin: 20px auto;
+    }
+</style>
+<form class="form-group" method="post" enctype="multipart/form-data">
+    <div>
+        <label>Liste Başlığı</label>
+        @Html.TextBoxFor(x => x.ListeBaslik, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.ListeBaslik, "", new { @style = "color:red" })
+    </div>
+
+    <div>
+        <label>Liste Açıklaması</label>
+        @Html.TextBoxFor(x => x.ListeAciklama, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.ListeAciklama, "", new { @style = "color:red" })
+    </div>
+
+    <div>
+        <label>Liste İçeriği</label>
+        @Html.TextAreaFor(x => x.ListeIcerik, new { @class = "form-control", id = "mytextarea" })
+        @Html.ValidationMessageFor(x => x.ListeIcerik, "", new { @style = "color:red" })
+    </div>
+
+    <div>
+        <label>Listeye bir resim ekle</label>
+        <div class="fileupload fileupload-new" data-provides="fileupload" id="checkFile">
+            <span class="btn-file">
+                <label class="custom-file-input" for="Upload">
+                </label>
+                <input id="Upload" type="file" multiple="multiple" name="fileUpload" accept="image/*" style="visibility: hidden">
+            </span>
+            <span class="fileupload-preview" style="margin-left:5px;"></span>
+            <a href="#" class="close fileupload-exists" data-dismiss="fileupload"></a>
+        </div>
+    </div>
+    <input type="submit" name="fileUpload" value="Liste Ekle" class="btn btn-info"  />
+</form>
+@section scripts{
+    <script type="text/javascript" src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
+    <script type="text/javascript">
+        tinymce.init({ selector: 'textarea', width: 600 });
+    </script>
+}

@@ -1,0 +1,24 @@
+﻿@model testRAF.ViewModels.myViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/details.css" rel="stylesheet" />
+@foreach (var item in Model.listeler)
+{
+
+<div class="col-lg-3 text-center inside">
+    <a href='@Url.Action("Detay/"+item.ListeId,"Listeler")'>
+        <img src='@Url.Content(item.listeResim.ListeOrtaYol)' class="img-responsive" />
+    </a>
+    <div class="bottom-left">
+        <p>@item.ListeBaslik</p>
+    </div>
+    <br />
+    @*<h2>@Html.ActionLink(item.ListeBaslik, "Detay/" + item.ListeId)</h2>
+        <h2 class="label">@item.ListeBaslik</h2>
+        <h5>@item.ListeAciklama</h5>
+        <p>Eklenme Tarihi: @item.ListeTarih.Value.ToShortDateString()</p>*@
+</div>
+
+}

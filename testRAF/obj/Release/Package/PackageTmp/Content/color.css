@@ -1,0 +1,25 @@
+﻿.ededed{
+    color:#ededed;
+}
+.yorum-title{
+    color: #757575;
+    font-size:12px;
+}
+
+
+
+/*profil*/
+.profil-sol h2{
+    color:#ededed;
+}
+.profil-sol p{
+    color:#aaa;
+}
+
+.green-button{
+    border:2px solid #11df5b;
+    border-radius:3px;
+    background:none;
+    color:#ededed;
+    padding:10px;
+}

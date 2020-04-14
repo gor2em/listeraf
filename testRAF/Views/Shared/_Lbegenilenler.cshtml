@@ -1,0 +1,22 @@
+﻿@*@model testRAF.ViewModels.myViewModel
+    <h2>Beğenilenler</h2>
+    @foreach (var item in Model.begendiklerim)
+    {
+    <div class="col-lg-2 text-center center-block">
+        @if (item.poster_path == null)
+        {
+            <img src="~/Content/Image/no-image.png" class="img-responsive imgnp" />
+        }
+        else
+        {
+            <a href="/Filmler"><img src="@item.poster_path" class="img-responsive" width="162px" height="100px" style="border:1px solid #757575;margin:10px auto" /></a>
+        }
+    </div>
+
+    }*@
+
+<div id="partial-begenilenler">
+
+</div>
+
+

@@ -1,0 +1,108 @@
+﻿@model testRAF.ViewModels.myViewModel
+@{
+    ViewBag.Title = Model.user.UserName + " / listeraf";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    body {
+        background: url("../../src/img/admin/3_2.jpg") no-repeat;
+        /*linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(117, 19, 93, 0.73)),*/
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+    }
+    html {
+        min-height: 100%
+    }
+    .navbar-inverse {
+        /*box-shadow: 0px 100px 150px #76f4a382;*/
+    }
+    footer p{
+        color:#757575;
+    }
+</style>
+
+<div class="profil-sol container-fluid col-lg-12" style="margin:50px auto">
+    <div class="col-lg-3 text-center">
+        <div class="head profil-top" name="@Model.user.UserId">
+            <form method="post" action="/User/Profil/@Model.user.UserId" enctype="multipart/form-data">
+
+                <input type="hidden" value="@Model.user.UserId" />
+                @if (Model.user.ResimId != null)
+                {
+                    <img src="@Model.user.resimler.OrtaYol" alt="..." class="img-circle img-border-level-0" width="150" height="150" style="margin:20px auto">
+                }
+                else
+                {
+                    <img src="https://via.placeholder.com/150" alt="..." class=" img-profil img-circle">
+                }
+                @if (ViewBag.id == Convert.ToInt32(Session["UserId"]))
+                {
+                    <div class="fileupload fileupload-new" data-provides="fileupload" id="checkFile">
+                        <span class="btn-file">
+                            <label class="custom-file-input" for="Upload">
+                            </label>
+                            <input id="Upload" type="file" multiple="multiple" name="fileUpload" accept="image/*" style="visibility: hidden">
+                        </span>
+                        <span class="fileupload-preview" style="margin-left:5px;"></span>
+                        <a href="#" class="close fileupload-exists" data-dismiss="fileupload"></a>
+                        <input type="submit" name="fileUpload" value="kaydet" class="green-button center-block" id="btnFile" style="display:none" />
+                    </div>
+                }
+                else
+                {
+
+
+                }
+                <hr />
+                <p class="hidden"><a href="" class="userId">@Model.user.UserId</a></p>
+                <h2>@Model.user.UserName</h2>
+                <p><b class="createdOn">@Model.user.CreatedOn.ToShortDateString()</b> tarihinde katıldı</p>
+                @*<p class="rutbe" data-rutbeid="@Model.UD.RutbeId">Rütbe <b>@Model.UD.Rutbeler.RutbeAd</b></p>*@
+                <span id="txt-shadow">@(new HtmlString(ViewBag.Rutbe))</span>
+                <br />
+            </form>
+
+        </div>
+        <div class="profil-istatistik" style="margin:50px auto">
+            @Html.Partial("_LTOP")
+            <i class="fas fa-cog"></i>
+        </div>
+
+
+    </div>
+    @Html.Partial("_LayoutUserMenu")
+    <div class="col-lg-9">
+
+        <div class="col-md-12" id="iAc">
+            @Html.Partial("_Lizlenenler")
+        </div>
+
+        <div class="col-md-12" id="bAc">
+            @Html.Partial("_Lbegenilenler")
+        </div>
+
+        <div class="col-md-12" id="DHSAc">
+            @Html.Partial("_LDHS")
+        </div>
+
+        <div class="col-lg-12" id="yAc">
+            @Html.Partial("_Lyorumlar")
+        </div>
+    </div>
+
+</div>
+
+@section scripts{
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/profil.js"></script>
+    <script>
+        $(function () {
+            $("#Upload").click(function () {
+                $("#btnFile").css("display", "block");
+            });
+            
+            
+           
+        });
+    </script>
+}

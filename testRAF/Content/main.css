@@ -1,0 +1,608 @@
+﻿body {
+    background: #111;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+    color: #757575;
+}
+
+.navbar {
+    height: 80px;
+    padding: 10px;
+}
+
+.navbar-nav {
+    float: right;
+}
+
+.navbar-header {
+    line-height: 40px;
+}
+
+.navbar-inverse {
+    border: none;
+    background-color: rgba(0, 0, 0, 0.57);
+}
+
+.navbar.navbar-inverse .navbar-nav li {
+    margin-left: 5px;
+    font-size: 18px;
+}
+
+.navbar-inverse .navbar-nav li a {
+    color: #ededed;
+    line-height: 30px;
+    transition-duration: 0.2s;
+}
+
+    .navbar-inverse .navbar-nav li a:hover {
+        color: #fff;
+        transition-duration: 0.2s;
+        text-decoration: underline;
+    }
+
+.navbar ul li ul {
+    position: absolute;
+    list-style: none;
+    margin:0;
+    padding: 0;
+    background: rgb(0, 0, 0);
+    z-index: 9999999!important;
+    width: 950px;
+    left: -700px;
+    display: none;
+    height:130px;
+}
+
+.navbar ul li {
+    float: left;
+}
+    .navbar ul li ul li a {
+        line-height: 100px;
+        border: 2px solid #757575 !important;
+        display: inline-block;
+        padding: 0 40px;
+        margin: 0 10px 6px 0;
+        border-radius: 2px;
+        margin-top: 5px;
+        text-align: center;
+    }
+    .navbar ul li:hover ul {
+        display: block;
+        margin: 0;
+        padding: 0;
+    }
+    .navbar ul li ul li a:hover {
+        border: 2px solid #11df5b !important;
+        text-decoration:none!important;
+    }
+hr {
+    border-color: #757575;
+}
+
+
+/*input*/
+.my-input {
+    background: rgba(117, 117, 117, 0.28);
+    border: none;
+    border-radius: 3px 3px;
+    height: 50px;
+    width: 250px;
+    margin-left: 15px;
+    padding: 10px;
+    transition-duration: 0.2s;
+}
+
+    .my-input:hover {
+        background: #ededed;
+        transition-duration: 0.2s;
+    }
+/**/
+
+/*index css*/
+#main {
+    padding: 30px 0;
+}
+
+#main-margin {
+    margin: 20px auto;
+}
+
+h1 {
+    font-size: 45px;
+    color: #ededed;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-shadow: 5px 5px 8px #222;
+}
+
+h2 {
+    font-size: 25px;
+    color: #ededed;
+    font-weight: 900;
+    margin: 20px auto
+}
+
+footer {
+    text-align: center;
+}
+
+    footer i {
+        font-size: 25px;
+        padding: 13px;
+    }
+
+        footer i:hover {
+            color: #11df5b;
+        }
+
+    footer p {
+        font-size: 12px;
+        text-align: justify;
+        color: #444
+    }
+
+a:hover {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.container .col-lg-2 .fa-heart:hover {
+    color: #d9534f;
+}
+
+.container .col-lg-2 .fa-eye:hover {
+    color: #11df5b;
+}
+
+
+/*index popüler üyeler*/
+.popU {
+    margin: 20px auto;
+    border-right: 1px solid #444;
+    position: relative;
+    overflow: hidden;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+
+    /*.popU:nth-child(4) {
+        border: none;
+    }*/
+
+    .popU:last-child {
+        border: none;
+    }
+
+    .popU h5 a,h2 a {
+        color: #ededed;
+    }
+
+.footer-header {
+    color: #ededed;
+    text-decoration: underline;
+}
+
+.list-unstyled li a {
+    color: #757575;
+}
+
+p a {
+    color: #757575;
+    text-decoration: none;
+    font-size: 11px;
+    text-align: center;
+}
+
+
+.icons {
+    font-size: 20px;
+    text-align: center;
+    padding: 5px;
+}
+
+.img a {
+    text-decoration: none;
+}
+
+i {
+    color: #757575;
+    padding: 5px;
+    cursor: pointer;
+}
+
+
+
+/*popüler üyeler styles*/
+
+.col-lg-12 .col-lg-3 {
+    text-align: center;
+    color: #ededed;
+}
+
+    .col-lg-12 .col-lg-3 h5 {
+        font-weight: bold;
+    }
+
+    .col-lg-12 .col-lg-3 p {
+        color: #757575;
+    }
+
+
+/*nasıl çalışır index*/
+
+.thumbnail {
+    text-align: center;
+    background: none;
+    border-color: #ccc;
+    transition-duration: 0.2s;
+}
+
+    .thumbnail:hover {
+        border-bottom: 1px solid #11df5b;
+        transition-duration: 0.2s;
+    }
+
+
+    .thumbnail i {
+        font-size: 50px;
+    }
+
+        .thumbnail i:hover {
+            cursor: default;
+        }
+
+    .thumbnail h3, p {
+        color: #757575;
+    }
+
+.caption {
+    border-top: 1px solid #757575;
+}
+
+
+
+/* image hover  */
+
+
+
+/*jquery scroll fade in*/
+
+.hideme {
+    opacity: 0;
+}
+
+/*filmler images size fixed*/
+
+
+
+/*account username and exit buttons*/
+.nav .navbar-nav .loginUser a {
+    font-size: 12px;
+    border-top: 2px solid #999;
+}
+
+    .nav .navbar-nav .loginUser a:hover {
+        text-shadow: 1px 2px 5px #fff;
+        transition: 0.4s;
+        text-decoration: none;
+    }
+
+
+/* detail page */
+.img-detail {
+    margin-top: 20px;
+    width: 162px;
+    height: 240px;
+    /*box-shadow: 1px 1px 30px rgba(17, 223, 91, 0.15);*/
+}
+
+.header h5 {
+    color: #54ce80;
+    font-size: 12px;
+}
+
+#margin-detail {
+    margin: 50px auto
+}
+
+.detail-comment {
+    border: none;
+    background: none;
+    border-bottom: 1px solid #757575;
+    margin: 20px auto;
+    width: 100%;
+    transition-duration: 0.3s;
+}
+
+    .detail-comment:focus {
+        transition-duration: 0.3s;
+        border-bottom: 1px solid #54ce80;
+    }
+
+
+
+
+
+/*Admin Panel*/
+/* The sidebar menu */
+/* The sidebar menu */
+.sidenav {
+    height: 100%; /* Full-height: remove this if you want "auto" height */
+    width: 200px; /* Set the width of the sidebar */
+    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background-color: #111; /* Black */
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 20px;
+    background: url("../src/img/admin/10.jpg") no-repeat;
+}
+
+    /* The navigation menu links */
+    .sidenav a {
+        text-align: center;
+        margin: 20px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #818181;
+        display: block;
+    }
+
+        /* When you mouse over the navigation links, change their color */
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
+
+/* Style page content */
+.main {
+    margin-left: 200px; /* Same as the width of the sidebar */
+    padding: 0px 10px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+
+        .sidenav a {
+            font-size: 18px;
+        }
+}
+
+
+
+/*profil sayfası*/
+.ic i {
+    margin: 20px auto;
+    font-size: 30px;
+    color: #ff290c;
+}
+
+/*profil menü*/
+.f-nav { /* To fix main menu container */
+    z-index: 9999;
+    position: fixed;
+    right: 0;
+    top: 12%;
+    background: rgba(27, 27, 27, 0.77);
+}
+
+#profil-menu-container {
+    text-align: center; /* Assuming your main layout is centered */
+}
+
+#profil-menu {
+    display: inline-block;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #ededed;
+}
+
+    .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+        color: #11df5b;
+    }
+
+/*profil movie images*/
+.img-margin-movies {
+    margin: 15px auto;
+}
+
+.img-profil-movies {
+    border: 1px solid #ccc;
+    transition: all .1s ease-in-out;
+    transform: rotate(10deg);
+    -webkit-transform: rotate(10deg);
+    text-align: center;
+    display: block;
+}
+
+.img-profil {
+    transition: all .3s ease-in-out;
+    text-align: center;
+    width: 100px;
+    height: 100px;
+}
+.img-enCokIzlenenler {
+    transition: all .3s ease-in-out;
+    width: 170px;
+    height: 230px;
+    border-radius: 5px;
+    box-shadow: 0 0 0 1px #757575;
+}
+    .img-enCokIzlenenler:hover {
+        transition: all .3s ease-in-out;
+        box-shadow: 0 0 0 3px #11df5b;
+    }
+
+.img-profil:hover{
+    transition: all .5s ease-in-out;
+    transform: rotate(-10deg);
+    -webkit-transform: rotate(-10deg);
+    filter: grayscale(100%);
+    border: 3px dashed;
+}
+
+
+.img-profil-mini {
+    border: 2px solid #757575;
+    transform: rotate(10deg);
+    -webkit-transform: rotate(10deg);
+    width: 60px;
+    height: 60px;
+}
+
+
+
+.img-border-level-0 {
+    box-shadow: 0 0 8px 2px rgba(0,0,0,.76);
+}
+
+.img-border-level-1 {
+    border: 5px dashed #ef9ec4;
+}
+
+.img-border-level-2 {
+    border: 5px dashed #7bdcee;
+}
+
+.img-border-level-3 {
+    border: 5px dashed #eb6022;
+}
+
+.img-border-level-4 {
+    border: 5px dashed #ffea00;
+}
+
+.img-border-level-5 {
+    border: 5px dashed #11df5b;
+}
+.img-border-level-6 {
+    border: 3px solid #757575;
+}
+
+.kapsayici {
+    position: relative;
+    text-align: center;
+}
+
+.mDel {
+    color: #ccc;
+    font-size: 25px;
+    position: absolute;
+    top: 20%;
+    left: 100%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+}
+
+
+
+.overlay {
+    position: absolute;
+    opacity: 0;
+    transition: .5s ease;
+    padding: 0 41%;
+}
+
+    .overlay i:hover {
+        color: #e41528;
+    }
+
+    .overlay p {
+        font-size: 15px;
+        position: absolute;
+        font-weight: bold;
+        top: -300%;
+        left: 100%;
+        transform: translate(-50%, -50%);
+    }
+
+    .overlay i p {
+        display: none;
+    }
+/*partial izlenenler*/
+.kapsayici:hover .overlay {
+    opacity: 1;
+    z-index: 999;
+}
+
+.kapsayici:hover .img-profil-movies {
+    transition: all .3s ease-in-out;
+    transform: rotate(360deg) scale(1.5);
+    -webkit-transform: rotate(360deg) scale(1.5);
+    z-index: 999;
+    opacity: 1;
+    -webkit-filter: brightness(10%);
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    -ms-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+    border: none;
+}
+
+
+.kapsayici, #partial-izlenenler, #partial-begenilenler, #partial-DHS {
+    border-bottom: 1px solid #5e4548;
+}
+
+
+
+/******* file file file  ***********/
+.custom-file-input::-webkit-file-upload-button {
+    visibility: hidden;
+}
+
+.custom-file-input::before {
+    content: 'Dosya seç...';
+    display: inline-block;
+    border-radius: 3px;
+    padding: 5px 8px;
+    outline: none;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 10pt;
+}
+
+.custom-file-input:hover::before {
+    color:#ededed;
+}
+
+
+
+.profil-top {
+    box-shadow: 0 0 8px 2px rgba(0,0,0,.76);
+    /*background: url("../src/img/background/prof-bg.jpg") no-repeat;*/
+    background:rgba(17, 17, 17, 0.62);
+    max-height: 100%;
+    background-size: cover;
+    text-align: center;
+}
+.profil-istatistik {
+    box-shadow: 0 0 8px 2px rgba(0,0,0,.76);
+    background: rgba(17, 17, 17, 0.62);
+    max-height: 100%;
+    background-size: cover;
+    text-align: center;
+}
+    .profil-istatistik i {
+        font-size:40px;
+        color:#ededed;
+        margin:50px auto;
+        cursor: pointer;
+    }
+        .profil-istatistik i:hover {
+            transition: all 1s ease-in-out;
+            transform: rotate(360deg);
+            -webkit-transform: rotate(360deg);
+            color: #11df5b;
+        }
+#partials {
+}

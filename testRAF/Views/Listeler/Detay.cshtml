@@ -1,0 +1,20 @@
+﻿@model testRAF.ViewModels.myViewModel
+@{
+    ViewBag.Title = "Detay";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@foreach (var item in Model.listeler)
+{
+
+    <img src="@item.listeResim.ListeBuyukYol"  class="img-responsive"/>
+    <h1>@item.ListeBaslik</h1>
+    <h2>@item.ListeAciklama</h2>
+    <h2>@Html.Raw(item.ListeIcerik)</h2>
+    <p>Ekleyen: @item.User.UserName</p>
+    <p>Eklenme Tarihi: @item.ListeTarih.Value.ToShortDateString()</p>
+    <p>@item.begenme</p>
+    <p>@item.goruntulenme</p>
+
+}
+

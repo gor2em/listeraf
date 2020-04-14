@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="listerafDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="begenilenler">
+    <Key>
+      <PropertyRef Name="BeId" />
+    </Key>
+    <Property Name="BeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="imdb_id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="User" Relationship="Self.FK_begenilenler_Users" FromRole="begenilenler" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="dahasonraizle">
+    <Key>
+      <PropertyRef Name="DSId" />
+    </Key>
+    <Property Name="DSId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="imdb_id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="User" Relationship="Self.FK_dahasonraizle_Users" FromRole="dahasonraizle" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="FilmTop">
+    <Key>
+      <PropertyRef Name="TId" />
+    </Key>
+    <Property Name="TId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="imdb_id" Type="Int32" />
+    <Property Name="izlenme" Type="Int32" />
+    <Property Name="begenme" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="dahasonraizle" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="yorum" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="izlenenler">
+    <Key>
+      <PropertyRef Name="IzId" />
+    </Key>
+    <Property Name="IzId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="imdb_id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="User" Relationship="Self.FK_izlenenler_Users" FromRole="izlenenler" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="uDetay">
+    <Key>
+      <PropertyRef Name="DetId" />
+    </Key>
+    <Property Name="DetId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="topIzlenen" Type="Int32" />
+    <Property Name="topBegenilen" Type="Int32" />
+    <Property Name="topDahaSonraIzle" Type="Int32" />
+    <Property Name="topYorum" Type="Int32" />
+    <NavigationProperty Name="User" Relationship="Self.FK__uDetay__UserId__3A4CA8FD" FromRole="uDetay" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="begenilenlers" Relationship="Self.FK_begenilenler_Users" FromRole="Users" ToRole="begenilenler" />
+    <NavigationProperty Name="dahasonraizles" Relationship="Self.FK_dahasonraizle_Users" FromRole="Users" ToRole="dahasonraizle" />
+    <NavigationProperty Name="izlenenlers" Relationship="Self.FK_izlenenler_Users" FromRole="Users" ToRole="izlenenler" />
+    <NavigationProperty Name="uDetays" Relationship="Self.FK__uDetay__UserId__3A4CA8FD" FromRole="Users" ToRole="uDetay" />
+    <NavigationProperty Name="Yorumlars" Relationship="listerafDBModel.FK_Yorumlar_Users" FromRole="User" ToRole="Yorumlar" />
+    <Property Name="RolId" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="Roller" Relationship="listerafDBModel.FK_Users_Roller" FromRole="User" ToRole="Roller" />
+  </EntityType>
+  <EntityType Name="Yorumlar">
+    <Key>
+      <PropertyRef Name="YorumId" />
+    </Key>
+    <Property Name="YorumId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="imdb_id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="YorumIcerik" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="YorumTarih" Type="DateTime" Precision="3" />
+    <Property Name="durum" Type="Boolean" />
+    <NavigationProperty Name="User" Relationship="listerafDBModel.FK_Yorumlar_Users" FromRole="Yorumlar" ToRole="User" />
+  </EntityType>
+  <Association Name="FK_begenilenler_Users">
+    <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+    <End Role="begenilenler" Type="Self.begenilenler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="begenilenler">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dahasonraizle_Users">
+    <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+    <End Role="dahasonraizle" Type="Self.dahasonraizle" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="dahasonraizle">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_izlenenler_Users">
+    <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+    <End Role="izlenenler" Type="Self.izlenenler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="izlenenler">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__uDetay__UserId__3A4CA8FD">
+    <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+    <End Role="uDetay" Type="Self.uDetay" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="uDetay">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="listerafDBEntities_1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="begenilenlers" EntityType="Self.begenilenler" />
+    <EntitySet Name="dahasonraizles" EntityType="Self.dahasonraizle" />
+    <EntitySet Name="FilmTops" EntityType="Self.FilmTop" />
+    <EntitySet Name="izlenenlers" EntityType="Self.izlenenler" />
+    <EntitySet Name="uDetays" EntityType="Self.uDetay" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="Yorumlars" EntityType="Self.Yorumlar" />
+    <AssociationSet Name="FK_begenilenler_Users" Association="Self.FK_begenilenler_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="begenilenler" EntitySet="begenilenlers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dahasonraizle_Users" Association="Self.FK_dahasonraizle_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="dahasonraizle" EntitySet="dahasonraizles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_izlenenler_Users" Association="Self.FK_izlenenler_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="izlenenler" EntitySet="izlenenlers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__uDetay__UserId__3A4CA8FD" Association="Self.FK__uDetay__UserId__3A4CA8FD">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="uDetay" EntitySet="uDetays" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Yorumlar_Users" Association="listerafDBModel.FK_Yorumlar_Users">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Yorumlar" EntitySet="Yorumlars" />
+    </AssociationSet>
+    <EntitySet Name="Rollers" EntityType="listerafDBModel.Roller" />
+    <AssociationSet Name="FK_Users_Roller" Association="listerafDBModel.FK_Users_Roller">
+      <End Role="Roller" EntitySet="Rollers" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+  <Association Name="FK_Yorumlar_Users">
+    <End Type="listerafDBModel.User" Role="User" Multiplicity="1" />
+    <End Type="listerafDBModel.Yorumlar" Role="Yorumlar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Yorumlar">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Roller">
+    <Key>
+      <PropertyRef Name="RolId" />
+    </Key>
+    <Property Name="RolId" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RolAd" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+    <NavigationProperty Name="Users" Relationship="listerafDBModel.FK_Users_Roller" FromRole="Roller" ToRole="User" />
+  </EntityType>
+  <Association Name="FK_Users_Roller">
+    <End Type="listerafDBModel.Roller" Role="Roller" Multiplicity="1" />
+    <End Type="listerafDBModel.User" Role="User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roller">
+        <PropertyRef Name="RolId" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="RolId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

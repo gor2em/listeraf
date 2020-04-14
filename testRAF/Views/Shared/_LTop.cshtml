@@ -1,0 +1,30 @@
+﻿@model testRAF.ViewModels.myViewModel
+
+@foreach (var detay in Model.udetay)
+{
+<div class="col-md-12 text-center">
+    <h2>İstatistik</h2>
+    <div class="col-md-12  table-bordered">
+        <p>İzledikleri</p>
+        <h2>@detay.topIzlenen</h2>
+    </div>
+    <div class="col-md-12  table-bordered">
+        <p>Beğendikleri</p>
+        <h2>@detay.topBegenilen</h2>
+    </div>
+    <div class="col-md-12  table-bordered">
+        <p>Daha sonra izle</p>
+        <h2>@detay.topDahaSonraIzle</h2>
+    </div>
+    <div class="col-md-12  table-bordered">
+        <p>Yorumlar</p>
+        <h2>@detay.topYorum</h2>
+    </div>
+    <div class="col-md-12  table-bordered">
+        <p>Puan</p>
+        <h2 class="label-primary">@detay.Puan</h2>
+    </div>
+</div>
+
+}
+

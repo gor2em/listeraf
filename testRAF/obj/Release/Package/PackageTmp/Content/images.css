@@ -1,0 +1,42 @@
+﻿body {
+    margin-top: -5%;
+    padding: 0;
+}
+
+#bg {
+    background-image: url('../src/img/background/7.jpg');
+     /*linear-gradient(to bottom, rgba(245, 246, 252, 0.52), rgba(117, 19, 93, 0.73)),*/
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.container-full {
+    width: 100%;
+    height: 100%;
+}
+
+.section-center__full {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.imgnp {
+    width: 162px;
+    height: 240px;
+}
+
+.imgH {
+    -webkit-filter: brightness(100%);
+}
+
+    .imgH:hover {
+        -webkit-filter: brightness(20%);
+        -webkit-transition: all 0.2s ease;
+        -moz-transition: all 0.2s ease;
+        -o-transition: all 0.2s ease;
+        -ms-transition: all 0.2s ease;
+        transition: all 0.2s ease;
+    }

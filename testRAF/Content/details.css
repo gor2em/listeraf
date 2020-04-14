@@ -1,0 +1,25 @@
+﻿.inside {
+    position: relative;
+    text-align:center;
+
+}
+    .inside img {
+        border-radius: 5px;
+        background: linear-gradient(#e66465, #9198e5);
+    }
+        .inside:hover img{
+            transition-duration:0.2s;
+            -webkit-filter: brightness(20%);
+            cursor:pointer;
+        }
+.bottom-left p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ededed;
+    font-weight: bold;
+    font-size: 20px;
+    text-transform: capitalize; 
+    background:rgba(0, 0, 0, 0.67);
+}

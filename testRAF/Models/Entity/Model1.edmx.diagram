@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="389d5fcc58e040d3ad7c316b0be5b34a" Name="Diagram1">
+        <EntityTypeShape EntityType="listerafDBModel.begenilenler" Width="1.5" PointX="5.25" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="listerafDBModel.dahasonraizle" Width="1.5" PointX="5.25" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="listerafDBModel.izlenenler" Width="1.5" PointX="5.25" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="listerafDBModel.Roller" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="listerafDBModel.uDetay" Width="1.5" PointX="5.25" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="listerafDBModel.User" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="listerafDBModel.Yorumlar" Width="1.5" PointX="5.25" PointY="12.875" IsExpanded="true" />
+        <AssociationConnector Association="listerafDBModel.FK_begenilenler_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="listerafDBModel.FK_dahasonraizle_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="listerafDBModel.FK_izlenenler_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="listerafDBModel.FK_Users_Roller" ManuallyRouted="false" />
+        <AssociationConnector Association="listerafDBModel.FK__uDetay__UserId__3A4CA8FD" ManuallyRouted="false" />
+        <AssociationConnector Association="listerafDBModel.FK_Yorumlar_Users" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="listerafDBModel.resimler" Width="1.5" PointX="0.75" PointY="10.25" />
+        <AssociationConnector Association="listerafDBModel.FK_Users_resimler" />
+        <AssociationConnector Association="listerafDBModel.FK_uDetay_resimler" />
+        <EntityTypeShape EntityType="listerafDBModel.Rutbeler" Width="1.5" PointX="0.75" PointY="3.875" />
+        <AssociationConnector Association="listerafDBModel.FK_uDetay_Rutbeler" />
+        <EntityTypeShape EntityType="listerafDBModel.Filmler" Width="1.5" PointX="8.375" PointY="1.375" />
+        <EntityTypeShape EntityType="listerafDBModel.filmResim" Width="1.5" PointX="6.125" PointY="17" />
+        <AssociationConnector Association="listerafDBModel.FK_Filmler_filmResim" />
+        <EntityTypeShape EntityType="listerafDBModel.listeler" Width="1.5" PointX="7.375" PointY="5.75" />
+        <AssociationConnector Association="listerafDBModel.FK_listeler_Users" />
+        <EntityTypeShape EntityType="listerafDBModel.listeResim" Width="1.5" PointX="0.75" PointY="0.875" />
+        <AssociationConnector Association="listerafDBModel.FK_listeler_listeResim" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

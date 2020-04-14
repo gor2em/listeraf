@@ -1,0 +1,252 @@
+﻿@model testRAF.ViewModels.testViewModel
+<style>
+    .thumbnail i {
+        font-size: 25px;
+    }
+
+        .thumbnail i:hover {
+            cursor: pointer;
+        }
+
+
+    .icons {
+        font-size: 30px;
+        text-align: center;
+        height: 50px;
+        margin-top: 20px;
+    }
+
+    span p {
+        font-size: 12px;
+    }
+
+    .navbar-inverse {
+        box-shadow: 0px 100px 150px #76f4a382;
+    }
+</style>
+<div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title text-left" id="myModalLabel"></h4>
+            </div>
+            <div class="modal-body">
+                <h5 class="text-info"></h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Kapat</button>
+                @*<button type="button" class="btn btn-primary"></button>*@
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-full">
+    <div class="col-md-12" id="margin-detail">
+        <div class="col-md-3 text-center" style="border-right:1px solid #757575">
+            <img src="@Model.Filmler.poster_path" class="img-responsive img-detail center-block take-pp" data-poster_path="@Model.Filmler.poster_path" />
+            <br />
+            <div class="icons" data-imdb_id="@Model.Filmler.imdb_id" name="@Model.Filmler.imdb_id" data-id="@Model.Filmler.id">
+                <span class="col-md-6">
+                    <a href="#" class="uWatched" data-toggle="modal" data-target="#basicModal"><i class="fas fa-eye"></i></a>
+                    <p>İzledim</p>
+                </span>
+
+                <span class="col-md-6">
+                    <a href="#" class="uLiked" data-toggle="modal" data-target="#basicModal"><i class="fas fa-heart"></i></a>
+                    <p>Beğendim</p>
+                </span>
+                <span class="col-md-6">
+                    <a href="#" class="uWLater" data-toggle="modal" data-target="#basicModal"><i class="fas fa-plus"></i></a>
+                    <p>Daha sonra izle</p>
+                </span>
+                <span class="col-md-6">
+                    <a href="#" class="yorumYap"><i class="fas fa-comment"></i></a>
+                    <p>Yorum yap</p>
+                </span>
+            </div>
+            <br /><br /><br /><br />
+            <hr />
+            <div class="icons">
+                <h2>İstatistik</h2>
+                <span class="col-md-3">
+                    <i class="fas fa-eye" style="color:#11df5b"></i>
+                    <p>23K</p>
+                </span>
+                <span class="col-md-3">
+                    <i class="fas fa-heart" style="color:#fa2e12"></i>
+                    <p>8.234</p>
+                </span>
+                <span class="col-md-3">
+                    <i class="fas fa-plus"></i>
+                    <p>1.225</p>
+                </span>
+                <span class="col-md-3">
+                    <i class="fas fa-comment"></i>
+                    <p>1.111</p>
+                </span>
+            </div>
+        </div>
+
+        <div class="col-md-9">
+            <div class="header">
+                <div class="col-md-12">
+                    <h5>@Model.Filmler.original_title</h5>
+                    <a href="" name="@Model.Filmler.title" data-title="@Model.Filmler.title" class="ad"><h2>@Model.Filmler.title</h2></a>
+                    <p><b>Yönetmen: </b>Test Test</p>
+                    <p>@Model.Filmler.release_date</p>
+                </div>
+
+                <div class="col-md-12">
+                    <hr />
+                    <p class="text-justify">@Model.Filmler.overview</p>
+                </div>
+
+                <div class="col-md-12">
+                    <br /><br /><br /><br />
+                    <h2>Yorum Yap</h2>
+                    <input type="text" placeholder="Yorum yapmak için tıklayın..." class="detail-comment" />
+                    <input type="submit" value="Gönder" class="btn btn-default pull-right yorumEkle" data-toggle="modal" data-target="#basicModal" />
+                </div>
+
+
+                <table class="col-md-12" style="margin-top:80px">
+                    <tbody>
+                        @*@if (Model.Yorumlar)
+                            { }*@
+                        @*<tr>
+                                <td class="col-md-12" style="text-align:justify;">
+                                    <p style="border-bottom:1px solid #757575;color:#ededed;">
+                                        Henüz yorum yapılmamış!
+                                    </p>
+                                </td>
+                            </tr>*@
+
+                        @*else
+                            { }*@
+                        @foreach (var yorum in Model.Yorumlar)
+                        {
+                            <tr>
+                                <td class="col-md-12"><h5><a href="/User/Profil/@yorum.User.UserId">@yorum.User.UserName</a></h5></td>
+                            </tr>
+                            <tr>
+
+                                <td class="col-md-10" style="text-align:justify;">
+                                    <p style="border-bottom:1px solid #757575;color:#ededed;">@yorum.YorumIcerik</p>
+                                </td>
+
+                                <td class="col-md-2">
+                                    @if (yorum.User.ResimId != null)
+                                    {
+                                        <a href="/User/Profil/@yorum.UserId"><img src="@yorum.User.resimler.OrtaYol" alt="..." class="img-profil-mini img-circle"></a>
+                                    }
+                                    else
+                                    {
+                                        <img src="https://via.placeholder.com/150" alt="..." class=" img-profil img-circle">
+                                    }
+                                    <p>@yorum.YorumTarih.Value.ToShortDateString()</p>
+
+
+
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+    $(function () {
+        let UserId = $(".takeUserId").text();
+        let imdb_id = $(".icons").data("imdb_id");
+        let title = $(".ad").data("title");
+        let poster_path = $(".take-pp").data("poster_path");
+        let id = $(".icons").data("id");
+
+        $(".yorumYap").click(function () {
+            $('html, body').animate({
+                scrollTop: '250px'
+            }, 1000);
+        });
+
+
+        $(document).on("click", ".uWatched", function () {
+            $.ajax({
+                type: "post",
+                url: @Url.Action("/Izlediklerim/"),
+                data: { UserId: UserId, imdb_id: imdb_id, title: title, poster_path: poster_path, id: id },
+                success: function (durum) {
+                    if (durum == "true") {
+                        $(".modal-header h4").html("<b>" + title + "</b>" + "  izlediklerim rafınızda bulunuyor.");
+                    }
+                    else {
+
+                        $(".modal-header h4").html(title + "  izlediklerim rafınıza eklendi.");
+                        $(".uWatched i").css("color", "#11df5b");
+                    }
+
+                    //window.location.replace("/Filmler/Index");
+                }
+            });
+        });
+        $(document).on("click", ".uLiked", function () {
+            $.ajax({
+                type: "post",
+                url: "/Filmler/Begendiklerim/",
+                data: { UserId: UserId, imdb_id: imdb_id, title: title, poster_path: poster_path, id: id },
+                success: function (durum) {
+                    if (durum == "true") {
+                        $(".modal-header h4").html("<b>" + title + "</b>" + "  listenizde bulunuyor.");
+                    }
+                    else {
+                        $(".modal-header h4").html(title + "  listenize eklendi.");
+                    }
+
+                    //window.location.replace("/Filmler/Index");
+                }
+            });
+        });
+        $(document).on("click", ".uWLater", function () {
+            $.ajax({
+                type: "post",
+                url: "/Filmler/DahaSonraIzle/",
+                data: { UserId: UserId, imdb_id: imdb_id, title: title, poster_path: poster_path, id: id },
+                success: function (durum) {
+                    if (durum == "true") {
+                        $(".modal-header h4").html("<b>" + title + "</b>" + "   izleme listenizde bulunuyor.");
+                    }
+                    else {
+                        $(".modal-header h4").html(title + "  izleme listenize eklendi.");
+                    }
+
+                    //window.location.replace("/Filmler/Index");
+                }
+            });
+        });
+        $(document).on("click", ".yorumEkle", function () {
+            let yorumIcerik = $(".detail-comment").val();
+            $.ajax({
+                type: "post",
+                url: "/Filmler/YorumEkle/",
+                data: { UserId: UserId, imdb_id: imdb_id, yorumIcerik: yorumIcerik, title: title, id: id },
+                success: function (sonuc) {
+                    if (sonuc == "true") {
+                        $(".modal-header h4").html("<b>" + title + "</b>" + " adlı filme yorum yaptınız.");
+                        $(".modal-body h5").html("Yorumunuz onaylandıkttan sonra sayfada görünecektir...");
+                        $(".detail-comment").val("");
+                    }
+                    else {
+                        $(".modal-header h4").html("Hata");
+                        $(".modal-body h5").html("Lütfen bir yorum yazın!");
+                    }
+                }
+            });
+        });
+    })
+</script>
+

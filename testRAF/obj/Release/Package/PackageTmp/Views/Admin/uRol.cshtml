@@ -1,0 +1,29 @@
+﻿@model testRAF.Models.Entity.User
+@{
+    ViewBag.Title = "uRol";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+
+@using (Html.BeginForm("rolGuncelle", "Admin", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.UserId);
+        @Html.TextBoxFor(m => m.UserId, new { @class = "form-control"})
+        <br />
+        @Html.LabelFor(m => m.UserName);
+        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control"})
+
+        @*<br />
+            @Html.LabelFor(m => m.Email);
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })*@
+        <br />
+        @Html.LabelFor(m => m.RolId);
+        @Html.DropDownListFor(m => m.Roller.RolId, (List<SelectListItem>)ViewBag.rolDeger, new { @class = "form-control" })
+
+    </div>
+    <div>
+        <button class="btn btn-info">Rol Güncelle</button>
+    </div>
+}
