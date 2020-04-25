@@ -2,11 +2,11 @@
 @Styles.Render("~/Content/images.css")
 @model testRAF.ViewModels.myViewModel
 @{
-    ViewBag.Title = "Listeraf | Film Dizi Sosyal Platformu";
+    ViewBag.Title = "Listeraf / Film Dizi Sosyal Platformu";
 }
 <link href="~/Content/details.css" rel="stylesheet" />
 <style>
-    .yorum_icerik .more-text {
+    .show-read-more .more-text {
         display: none;
     }
 </style>
@@ -22,12 +22,12 @@
 
 <div class="row" style="margin-top:-100px">
     <div id="main-margin">
-        <div class="container hideme">
+        <div class="container">
             <h2>Nasıl çalışır?</h2>
             <div class="row">
                 <div class="col-lg-3 col-sm-6 col-md-4">
                     <div class="thumbnail">
-                        <i class="fas fa-heart"></i>
+                        <i class="fas fa-heart" id="heart"></i>
                         <div class="caption">
                             <h3>Beğendim</h3>
                             <p>Beğendiğiniz filmleri profilinize eklemek isterseniz kalp butonuna basın.</p>
@@ -36,7 +36,7 @@
                 </div>
                 <div class="col-lg-3 col-sm-6 col-md-4">
                     <div class="thumbnail">
-                        <i class="fas fa-eye"></i>
+                        <i class="fas fa-eye" id="eye"></i>
                         <div class="caption">
                             <h3>İzledim</h3>
                             <p>İzlediğiniz filmleri göz butonuna basarak profilinize ekleyin ve profilinizi genişletin.</p>
@@ -45,7 +45,7 @@
                 </div>
                 <div class="col-lg-3 col-sm-6 col-md-4">
                     <div class="thumbnail">
-                        <i class="fas fa-plus"></i>
+                        <i class="fas fa-plus" id="plus"></i>
                         <div class="caption">
                             <h3>Daha sonra izle</h3>
                             <p>Daha sonra izlemek istediğiniz filmleri + butonuna basarak profilinize ekleyin.</p>
@@ -54,7 +54,7 @@
                 </div>
                 <div class="col-lg-3 col-sm-6 col-md-4">
                     <div class="thumbnail">
-                        <i class="fas fa-comment"></i>
+                        <i class="fas fa-comment" id="comment"></i>
                         <div class="caption">
                             <h3>Yorumla</h3>
                             <p>Herhangi bir film hakkında yorum yapın ve site içerisinde popülerliğinizi arttırın.</p>
@@ -66,13 +66,13 @@
     </div>
 
     @*<div class="main-margin">
-        @(new HtmlString(ViewBag.Result))
-    </div>*@
+            @(new HtmlString(ViewBag.Result))
+        </div>*@
 
 
     <div class="row">
         <div id="main-margin">
-            <div class="container hideme">
+            <div class="container ">
                 <h2>Listeraf en çok izlenenler</h2>
                 <div class="row">
 
@@ -80,168 +80,188 @@
                     {
                         <div class="col-lg-2 text-center">
 
-                            <a href='@Url.Action("Detay/"+item.id,"Filmler")'><img src='@Url.Content(item.filmResim.poster_path)' class="img-enCokIzlenenler" /></a>
+                            <div class="kapsayici">
+                                <a href='@Url.Action("Detay/"+item.id,"Filmler")'>
+                                    <img src="~/Content/Image/loading.gif" class="img-enCokIzlenenler lazy" data-src="@item.filmResim.poster_path" />
 
-                            <p>@item.izlenme kişi izledi</p>
-                        </div>
-
-                    }
-                </div>
-            </div>
-        </div>
-        </div>
-
-
-
-
-        <div id="main-margin">
-            <div class="container hideme">
-                <h2>Son eklenen listeler</h2>
-                <div class="row">
-                    @foreach (var item in Model.listeler)
-                    {
-
-                        <div class="col-lg-3 text-center inside">
-                            <a href='@Url.Action("Detay/"+item.ListeId,"Listeler")'>
-                                <img src='@Url.Content(item.listeResim.ListeOrtaYol)' class="img-responsive" />
-                            </a>
-                            <div class="bottom-left">
-                                <p>@item.ListeBaslik</p>
-                            </div>
-                            <br />
-                            @*<h2>@Html.ActionLink(item.ListeBaslik, "Detay/" + item.ListeId)</h2>
-                                <h2 class="label">@item.ListeBaslik</h2>
-                                <h5>@item.ListeAciklama</h5>
-                                <p>Eklenme Tarihi: @item.ListeTarih.Value.ToShortDateString()</p>*@
-                        </div>
-
-                    }
-                </div>
-            </div>
-        </div>
-
-
-
-        <div id="main-margin">
-            <div class="container hideme">
-                <h2>Popüler üyeler</h2>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="col-lg-12">
-
-                            @foreach (var item in Model.udetay)
-                            {
-                                <div class="col-lg-2 text-center popU">
-                                    @if (item.ResimId != null)
-                                    {
-                                        if (item.Puan >= 0 && item.Puan <= 99 || item.Puan < 0)
-                                        {
-                                            <a href="/User/Profil/@item.UserId">
-                                                <img src="@item.resimler.OrtaYol" alt="..." class="img-profil img-circle img-border-level-0">
-                                            </a>
-                                        }
-
-                                        else if (item.Puan >= 100 && item.Puan <= 149)
-                                        {
-                                            <a href="/User/Profil/@item.UserId"><img src="@item.resimler.OrtaYol" alt="..." class="img-profil img-circle img-border-level-1"></a>
-                                        }
-
-                                        else if (item.Puan >= 150 && item.Puan <= 199)
-                                        {
-                                            <a href="/User/Profil/@item.UserId"><img src="@item.resimler.OrtaYol" alt="..." class="img-profil img-circle img-border-level-2"></a>
-                                        }
-                                        else if (item.Puan >= 200 && item.Puan <= 249)
-                                        {
-                                            <a href="/User/Profil/@item.UserId"><img src="@item.resimler.OrtaYol" alt="..." class="img-profil img-circle img-border-level-3"></a>
-                                        }
-
-                                        else if (item.Puan >= 250 && item.Puan <= 299)
-                                        {
-                                            <a href="/User/Profil/@item.UserId"><img src="@item.resimler.OrtaYol" alt="..." class="img-profil img-circle img-border-level-4"></a>
-                                        }
-
-                                        else
-                                        {
-                                            <a href="/User/Profil/@item.UserId"><img src="@item.resimler.OrtaYol" alt="..." class="img-profil img-circle img-border-level-5"></a>
-                                        }
-
-                                    }
-                                    else
-                                    {
-                                        <a href="/User/Profil/@item.UserId">
-                                            <img src="https://via.placeholder.com/150" alt="..." class="img-profil img-circle img-border-level-0" style="border:5px dashed #757575;">
-                                        </a>
-                                    }
-                                    <h5><a href="/User/Profil/@item.UserId">@item.User.UserName</a></h5>
-                                    <p class="label label-default" style="color:#222;font-size:13px">Puan: @item.Puan</p>
-                                    <br /><br />
-                                    <p><b class="ededed">@item.topIzlenen</b> izledi<br /> <b class="ededed">@item.topYorum</b> yorumladı</p>
-                                </div>
-                            }
-                        </div>
-                    </div>
-
-                    <div class="col-lg-12">
-                        <div id="main-margin">
-
-                            
-                            <div class="row">
-
-                                @foreach (var item in Model.rastgele_film)
-                                {
-                                <div class="col-lg-8 text-center">
-                                    <h2 class="text-center">Rastgele film önerisi</h2>
-                                    <a href='@Url.Action("Detay/"+item.id,"Filmler")'><img src='@Url.Content(item.filmResim.poster_path)' class="img-responsive img-thumbnail" width="300" height="500" /></a>
-                                    <h2>@item.title</h2>
-                                    <p>@item.izlenme kişi izledi</p>
-                                </div>
-
-                                }
-
-
-
-
-                                <div class="col-lg-4">
-                                    <h2>Son yorumlar</h2>
-                                    <hr />
-                                    @foreach (var item in Model.yorumlarim)
-                                    {
-
-                                        <a href="/User/Profil/@item.UserId"><h5 class="label label-default">@item.User.UserName</h5></a>
-                                        <a href="/Filmler/Detay/@item.id"><p class="yorum-title pull-right">@item.title</p></a>
-                                        <br /><br />
-                                        <p class="text-justify yorum_icerik" style="color:#bbb;font-size:13px">@item.YorumIcerik</p>
-                                        <hr />
-                                    }
-                                </div>
+                                    <div class="overlay-index">
+                                        <i class="fas fa-eye mWatched" style="color:#11df5b"></i>
+                                        <br />
+                                        <p>@item.izlenme</p>
+                                    </div>
+                                </a>
                             </div>
                         </div>
+                    }
                 </div>
             </div>
         </div>
     </div>
 
 
-    @section scripts{
 
-        <script>
-            $(function () {
-                var maxLength = 50;
-                $(".yorum_icerik").each(function () {
-                    var myStr = $(this).text();
-                    if ($.trim(myStr).length > maxLength) {
-                        var newStr = myStr.substring(0, maxLength);
-                        var removedStr = myStr.substring(maxLength, $.trim(myStr).length);
-                        $(this).empty().html(newStr);
-                        $(this).append(' <a href="javascript:void(0);" class="read-more" style="color:#11df5b" >devamını oku...</a>');
-                        $(this).append('<span class="more-text">' + removedStr + '</span>');
 
-                    });
-                $(".read-more").click(function () {
-                    $(this).siblings(".more-text").contents().unwrap();
-                    $(this).remove();
-                });
+    <div id="main-margin">
+        <div class="container">
+            <h2>Son eklenen listeler</h2>
+            <div class="row">
+                @foreach (var item in Model.listeler)
+                {
+
+                    <div class="col-lg-3 text-center inside">
+                        <a href='@Url.Action("Detay/"+item.ListeId,"Listeler")'>
+                            <img src="~/Content/Image/loading.gif" class="img-responsive lazy" data-src="@Url.Content(item.listeResim.ListeOrtaYol)" />
+
+                        </a>
+                        <div class="bottom-left">
+                            <p>@item.ListeBaslik</p>
+                        </div>
+                        <br />
+                        @*<h2>@Html.ActionLink(item.ListeBaslik, "Detay/" + item.ListeId)</h2>
+                            <h2 class="label">@item.ListeBaslik</h2>
+                            <h5>@item.ListeAciklama</h5>
+                            <p>Eklenme Tarihi: @item.ListeTarih.Value.ToShortDateString()</p>*@
+                    </div>
+
+                }
+            </div>
+        </div>
+    </div>
+
+
+
+    <div id="main-margin">
+        <div class="container">
+            <h2>Popüler üyeler</h2>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="col-lg-12">
+
+                        @foreach (var item in Model.udetay)
+                        {
+                        <div class="col-lg-2 text-center popU">
+                            @if (item.ResimId != null)
+                            {
+                                if (item.Puan >= 0 && item.Puan <= 99 || item.Puan < 0)
+                                {
+                                    <a href="/User/Profil/@item.UserId">
+                                        <img src="~/Content/Image/loading.gif" class="img-profil img-circle img-border-level-0 lazy" data-src="@item.resimler.OrtaYol" />
+                                    </a>
+                                }
+
+                                else if (item.Puan >= 100 && item.Puan <= 149)
+                                {
+                                    <a href="/User/Profil/@item.UserId">
+                                        <img src="~/Content/Image/loading.gif" class="img-profil img-circle img-border-level-1 lazy" data-src="@item.resimler.OrtaYol" />
+                                    </a>
+                                }
+
+                                else if (item.Puan >= 150 && item.Puan <= 199)
+                                {
+                                    <a href="/User/Profil/@item.UserId">
+                                        <img src="~/Content/Image/loading.gif" class="img-profil img-circle img-border-level-2 lazy" data-src="@item.resimler.OrtaYol" />
+                                    </a>
+                                }
+                                else if (item.Puan >= 200 && item.Puan <= 249)
+                                {
+                                    <a href="/User/Profil/@item.UserId">
+                                        <img src="~/Content/Image/loading.gif" class="img-profil img-circle img-border-level-3 lazy" data-src="@item.resimler.OrtaYol" />
+                                    </a>
+                                }
+
+                                else if (item.Puan >= 250 && item.Puan <= 299)
+                                {
+                                    <a href="/User/Profil/@item.UserId">
+                                        <img src="~/Content/Image/loading.gif" class="img-profil img-circle img-border-level-4 lazy" data-src="@item.resimler.OrtaYol" />
+                                    </a>
+                                }
+
+                                else
+                                {
+                                    <a href="/User/Profil/@item.UserId">
+                                        <img src="~/Content/Image/loading.gif" class="img-profil img-circle img-border-level-5 lazy" data-src="@item.resimler.OrtaYol" />
+                                    </a>
+                                }
+
+                            }
+                            else
+                            {
+                                <a href="/User/Profil/@item.UserId">
+                                    <img src="https://via.placeholder.com/150" alt="..." class="img-profil img-circle img-border-level-0" style="border:5px dashed #757575;">
+                                </a>
+                            }
+                            <h5><a href="/User/Profil/@item.UserId">@item.User.UserName</a></h5>
+                            <p class="label label-default" style="color:#222;font-size:13px">Puan: @item.Puan</p>
+                            <br /><br />
+                            <p><b class="ededed">@item.topIzlenen</b> izledi<br /> <b class="ededed">@item.topYorum</b> yorumladı</p>
+                        </div>
+                        }
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+                    <div id="main-margin">
+                        <div class="row">
+                            @foreach (var item in Model.rastgele_film)
+                            {
+                                <div class="col-lg-8 text-center">
+                                    <h2 class="text-center">Rastgele film önerisi</h2>
+                                    <a href='@Url.Action("Detay/"+item.id,"Filmler")'>
+                                    <img src="~/Content/Image/loading.gif" class="img-responsive img-thumbnail lazy" width="300" height="500" data-src="@Url.Content(item.filmResim.poster_path)" />
+                                    </a>
+                                    <h2>@item.title</h2>
+                                    <p>@item.izlenme kişi izledi</p>
+                                </div>
+
+                            }
+
+
+
+
+                            <div class="col-lg-4 sonyorumlar">
+                                <h2>Son yorumlar</h2>
+                                <hr />
+                                @foreach (var item in Model.yorumlarim)
+                                {
+
+                                    <a href="/User/Profil/@item.UserId"><h5 class="label label-default">@item.User.UserName</h5></a>
+                                    <a href="/Filmler/Detay/@item.id"><p class="yorum-title pull-right">@item.title</p></a>
+                                    <br /><br />
+                                    <p class="text-justify show-read-more" style="color:#bbb;font-size:13px">@item.YorumIcerik</p>
+                                    <hr />
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+
+    <script>
+        $(function () {
+
+            var maxLength = 50;
+            $(".show-read-more").each(function () {
+                var myStr = $(this).text();
+                if ($.trim(myStr).length > maxLength) {
+                    var newStr = myStr.substring(0, maxLength);
+                    var removedStr = myStr.substring(maxLength, $.trim(myStr).length);
+                    $(this).empty().html(newStr);
+                    $(this).append(' <a href="javascript:void(0);" class="read-more">devamını oku...</a>');
+                    $(this).append('<span class="more-text">' + removedStr + '</span>');
+                }
             });
-        </script>
 
-    }
+            $(".read-more").click(function () {
+                $(this).siblings(".more-text").contents().unwrap();
+                $(this).remove();
+            });
+        });
+    </script>
+
+}

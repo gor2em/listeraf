@@ -1,0 +1,29 @@
+﻿h1 {
+    font-size: 45px;
+    color: #ededed;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-shadow: 5px 5px 8px #222;
+}
+h2{
+    font-size: 25px;
+    color: #ededed;
+    font-weight: bold;
+    margin: 20px auto;
+    text-transform:capitalize
+}
+.thumbnail h3{
+    color:#ccc;
+}
+h5 a {
+    color: #54ce80;
+    font-size: 12px;
+}
+
+
+.m-comments {
+    border: 2px solid #333;
+    border-radius: 5px;
+    padding: 10px;
+    color: #ccc;
+}

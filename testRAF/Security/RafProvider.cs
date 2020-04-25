@@ -40,10 +40,10 @@ namespace testRAF.Security
             throw new NotImplementedException();
         }
 
-        public override string[] GetRolesForUser(string username)
+        public override string[] GetRolesForUser(string email)
         {
             listerafDBEntities4 lr = new listerafDBEntities4();
-            var user = lr.Users.FirstOrDefault(x => x.UserName == username);
+            var user = lr.Users.FirstOrDefault(x => x.Email == email);
             return new string[] { user.Roller.RolAd};
         }
 

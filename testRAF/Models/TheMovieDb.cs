@@ -12,6 +12,7 @@ namespace testRAF.Models
         public string searchText { get; set; }
         public bool adult { get; set; }
         public string also_known_as { get; set; }
+        public string g_name {get;set;}
         public string biography { get; set; }
         public string birthday { get; set; }
         public string deathday { get; set; }
@@ -41,7 +42,12 @@ namespace testRAF.Models
         public string release_date { get; set; }
 
         public virtual Yorumlar yorum { get; set; }
+        
 
-
+    }
+    public class genres
+    {
+        public int id { get; set; }
+        public string name { get; set; }
     }
 }

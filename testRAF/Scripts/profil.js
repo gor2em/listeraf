@@ -10,7 +10,7 @@ function izlediklerim() {
     $('div#partial-izlenenler').html("<h2>İzlenenler</h2>");
     $.getJSON(url, function (data) {
         for (let item in data.Result) {
-            let deger = "<div class='col-lg-1  col-sm-1 col-xs-2 img-margin-movies kapsayici'><a href=/Filmler/Detay/" + data.Result[item].id + " > <img src=" + data.Result[item].poster_path + " class='img-circle img-profil-movies' width='110' height='110' /></a><div class='overlay'><p>" + data.Result[item].title + "</p><br><a href='#'><i class='fas fa-minus-circle mDel modalAc' data-imdb_id='" + data.Result[item].imdb_id + "'></i></a></div></div>";
+            let deger = "<div class='col-lg-1  col-sm-1 col-xs-2 img-margin-movies kapsayici'><a href=/Filmler/Detay/" + data.Result[item].id + " > <img src='~/Content/Image/loading.gif' class='img-circle img-profil-movies lazy' width='110' height='110' data-src=" + data.Result[item].poster_path+"  /></a><div class='overlay'><p>" + data.Result[item].title + "</p><br><a href='#'><i class='fas fa-minus-circle mDel modalAc' data-imdb_id='" + data.Result[item].imdb_id + "'></i></a></div></div>";
             $('div#partial-izlenenler').append(deger);
         }
     });
@@ -23,7 +23,7 @@ function begendiklerim() {
     $('div#partial-begenilenler').html("<h2>Beğenilenler</h2>");
     $.getJSON(url, function (data) {
         for (let item in data.Result) {
-            let deger = "<div class='col-lg-1  img-margin-movies kapsayici'><a href=/Filmler/Detay/" + data.Result[item].id + " > <img src=" + data.Result[item].poster_path + " class='img-circle img-profil-movies' width='110' height='110' /></a><div class='overlay'><p>" + data.Result[item].title + "</p><br><a href='#'><i class='fas fa-minus-circle mDel modalAc' data-imdb_id='" + data.Result[item].imdb_id + "'></i></a></div></div>";
+            let deger = "<div class='col-lg-1  img-margin-movies kapsayici'><a href=/Filmler/Detay/" + data.Result[item].id + " > <img src='~/Content/Image/loading.gif' class='img-circle img-profil-movies lazy' width='110' height='110' data-src=" + data.Result[item].poster_path +"  /></a><div class='overlay'><p>" + data.Result[item].title + "</p><br><a href='#'><i class='fas fa-minus-circle mDel modalAc' data-imdb_id='" + data.Result[item].imdb_id + "'></i></a></div></div>";
             $('div#partial-begenilenler').append(deger);
         }
     });
@@ -36,7 +36,7 @@ function DahaSonraIzle() {
     $('div#partial-DHS').html("<h2>Daha sonra izle</h2>");
     $.getJSON(url, function (data) {
         for (let item in data.Result) {
-            let deger = "<div class='col-lg-1 img-margin-movies kapsayici'><a href=/Filmler/Detay/" + data.Result[item].id + " > <img src=" + data.Result[item].poster_path + " class='img-circle img-profil-movies' width='110' height='110' /></a><div class='overlay'><p>" + data.Result[item].title + "</p><br><a href='#'><i class='fas fa-minus-circle mDel modalAc' data-tid='" + data.Result[item].filmId+ "'  data-imdb_id='" + data.Result[item].imdb_id + "'></i></a></div></div>";
+            let deger = "<div class='col-lg-1 img-margin-movies kapsayici'><a href=/Filmler/Detay/" + data.Result[item].id + " > <img src='~/Content/Image/loading.gif' class='img-circle img-profil-movies lazy' width='110' height='110' data-src=" + data.Result[item].poster_path +"  /></a><div class='overlay'><p>" + data.Result[item].title + "</p><br><a href='#'><i class='fas fa-minus-circle mDel modalAc' data-tid='" + data.Result[item].filmId + "'  data-imdb_id='" + data.Result[item].imdb_id + "'></i></a></div></div>";
             $('div#partial-DHS').append(deger);
         }
     });
@@ -44,16 +44,15 @@ function DahaSonraIzle() {
 function Yorumlar() {
     let url = "/User/Yorumlar/" + id;
     $("div#partial-yorumlar").html();
-    var thead = "<div class='text-center center-block'>";
+    var thead = "<div class=' text-center center-block'>";
     $('div#partial-yorumlar').append(thead);
     $('div#partial-yorumlar').html("<h2>Yorumlar</h2>");
     $.getJSON(url, function (data) {
         for (let item in data.Result) {
             let deger = "<div class='col-lg-12'>" +
                 "<div class='col-lg-8'><h5>" + data.Result[item].UserName + "</h5></div>" +
-                "<div class='col-lg-4 text-right'><p><a href='/Filmler/Detay/" + data.Result[item].id + "' class='label label-danger'>" + data.Result[item].title + "</a></p></div>" +
-                "<div class='col-lg-12' style='text-align:justify;'><p style='border-bottom:1px solid #757575;color:#ededed;'>" + data.Result[item].YorumIcerik + "</p></div>" +
-                "</div>";
+                "<div class='col-lg-4 text-right'><p><a href='/Filmler/Detay/" + data.Result[item].id + "' class='label label-danger'>" + data.Result[item].title + "</a></p></div></div>" +
+                "<div class='col-lg-12 m-comments'>" + data.Result[item].YorumIcerik + "</p></div>";
             $('div#partial-yorumlar').append(deger);
         }
     });
@@ -107,9 +106,14 @@ $("#tog-yorumlar").click(function () {
 
 
 
+
+
 /*silme işlemi*/
 let userId = $(".takeUserId").text();
 $(function () {
+    izlediklerim();
+    begendiklerim();
+    DahaSonraIzle();
     const usID = $(".userId").text();
     const tuID = $(".takeUserId").text();
     $(document).on("mouseover", ".overlay i", function () {
@@ -120,7 +124,7 @@ $(function () {
     $(document).on("click", "#partial-izlenenler .overlay a i", function () {
         let imdb_id = $(this).data('imdb_id');/*important*/
         $.ajax({
-            type: "POST", 
+            type: "POST",
             url: "/User/IzSil",
             data: { userId: userId, imdb_id: imdb_id },
             success: function (durum) {
@@ -168,7 +172,7 @@ $(function () {
     });
 
 
-   
+
 
 
 });

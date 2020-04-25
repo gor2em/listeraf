@@ -1,53 +1,159 @@
-﻿.ededed{
-    color:#ededed;
+﻿.ededed {
+    color: #ededed;
 }
-.yorum-title{
+
+.yorum-title {
     color: #757575;
-    font-size:12px;
+    font-size: 12px;
 }
 
 
 
 /*profil*/
-.profil-sol h2{
-    color:#ededed;
-}
-.profil-sol p{
-    color:#aaa;
-}
-.createdOn{
+.profil-sol h2 {
     color: #ededed;
 }
 
-.green-button{
-    border:2px solid #11df5b;
-    border-radius:3px;
-    background:none;
-    color:#ededed;
-    padding:10px;
+.profil-sol p {
+    color: #aaa;
+}
+
+.createdOn {
+    color: #ededed;
+}
+
+.green-button {
+    border: 2px solid #11df5b;
+    border-radius: 3px;
+    background: none;
+    color: #ededed;
+    padding: 10px;
 }
 
 /*profil rutbe*/
 #txt-shadow p {
-    text-shadow:2px 10px 5px rgb(0, 0, 0);
-    font-size:20px;
-    
+    text-shadow: 2px 10px 5px rgb(0, 0, 0);
+    font-size: 20px;
 }
+
 .r-acemi {
     color: #ef9ec4;
 }
+
 .r-yarisci {
     color: #7bdcee;
 }
+
 .r-yildiz {
     color: #eb6022;
 }
+
 .r-asil {
     color: #ffea00;
 }
+
 .r-efsane {
     color: #11df5b;
 }
+
 .r-admin {
     color: #e61717;
 }
+
+
+
+/*index en çok izlennler*/
+.kapsayici {
+    position: relative;
+    text-align: center;
+    border:none!important;
+}
+
+.mWatched {
+    color: #ccc;
+    font-size: 25px;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+}
+
+
+
+.overlay-index {
+    background: rgba(0, 0, 0, 0.87);
+    position: absolute;
+    opacity: 0;
+    transition: .5s ease;
+    padding: 0 52%;
+    top: 0;
+    height: 250px;
+   
+}
+
+    .overlay-index i:hover {
+        color: #e41528;
+    }
+    .overlay-index i {
+        margin-left: -10%;
+    }
+    .overlay-index p {
+        margin-left:10%;
+        font-size: 25px;
+        color: #ededed;
+        position: absolute;
+        font-weight: bold;
+        transform: translate(-50%, -50%);
+        top: 50%;
+        left: 50%;
+    }
+
+    .overlay-index i p {
+        display: none;
+    }
+/*partial izlenenler*/
+.kapsayici:hover .overlay-index {
+    opacity: 1;
+    z-index: 999;
+}
+
+.kapsayici:hover .img-enCokIzlenenler {
+    transition: all .3s ease-in-out;
+    z-index: 999;
+    opacity: 1;
+    border: none;
+    box-shadow: 0 0 0 3px #11df5b !important;
+    transition: all .3s ease-in-out;
+}
+
+.thumbnail:hover,#heart,#eye,#plus,#comment {
+    transition: .3s linear;
+}
+.thumbnail:hover #heart {
+    color: red;
+}
+.thumbnail:hover #eye {
+    color: #11df5b;
+}
+.thumbnail:hover #plus {
+    color: #fa6c23;
+}
+.thumbnail:hover #comment {
+    color: #ccc;
+}
+
+.mDetay-buton {
+    background: none;
+    border: none;
+    box-shadow: 100px 0 0 inset #333;
+    padding: 10px;
+    color: #ededed;
+    width: 100px;
+    transition: .2s linear;
+}
+    .mDetay-buton:hover {
+        box-shadow: 100px 0 0 inset #54ce80;
+        transition-duration: 0.2s;
+        transition: .2s linear;
+    }

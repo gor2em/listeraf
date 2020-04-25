@@ -54,6 +54,12 @@
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -154,10 +160,12 @@
     <Compile Include="Class\TheMoviedbSearchPerson.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\DizilerController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\FilmlerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ListelerController.cs" />
+    <Compile Include="Controllers\testController.cs" />
     <Compile Include="Controllers\TmdbApiController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Crypto.cs" />
@@ -220,6 +228,7 @@
     <Compile Include="Models\Entity\Yorumlar.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\FilmModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\TheMovieDb.cs" />
     <Compile Include="Models\UserDetail.cs" />
@@ -246,11 +255,17 @@
     <Content Include="Content\Image\edit-icon.png" />
     <Content Include="Content\Image\loading.gif" />
     <Content Include="Content\Image\no-image.png" />
+    <Content Include="Content\Image\user-no-image.png" />
+    <Content Include="Content\jquery.autocomplete.css" />
+    <Content Include="Content\jquery.autocomplete.js" />
     <Content Include="Content\main.css" />
-    <Content Include="favicon.ico" />
+    <Content Include="Content\PagedList.css" />
+    <Content Include="Content\tag.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="l1.png" />
+    <Content Include="lr_icon.png" />
     <Content Include="Models\Entity\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
@@ -294,6 +309,9 @@
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui.css" />
+    <Content Include="Scripts\jquery-ui.js" />
+    <Content Include="Scripts\jquery.lazyload.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -376,6 +394,7 @@
     <Content Include="src\img\admin\10.jpg" />
     <Content Include="src\img\admin\11.jpg" />
     <Content Include="src\img\admin\12.jpg" />
+    <Content Include="src\img\admin\13.jpg" />
     <Content Include="src\img\admin\2.jpg" />
     <Content Include="src\img\admin\2_2.jpg" />
     <Content Include="src\img\admin\3.jpg" />
@@ -558,6 +577,8 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
     <Content Include="Views\Listeler\Detay.cshtml" />
+    <Content Include="Views\test\Index.cshtml" />
+    <Content Include="Views\Diziler\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="src\img\listeler\buyukyol\" />

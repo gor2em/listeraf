@@ -1,4 +1,6 @@
 ﻿@model IEnumerable<testRAF.Models.Entity.User>
+@using PagedList
+@using PagedList.Mvc
 @{
     ViewBag.Title = "Üyeler";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
@@ -50,14 +52,16 @@
         {
             <tr>
                 <td>@uye.UserId</td>
-                <td>@uye.UserName</td>
+                <td><a href="/User/Profil/@uye.UserId" class="label label-default">@uye.UserName</a></td>
                 <td>@uye.CreatedOn</td>
                 <td>@uye.Roller.RolAd</td>
 
                 <td><a href="/Admin/uRol/@uye.UserId" class="btn btn-info rolGuncelle">Güncelle</a></td>
                 @*<td><a href="/Admin/uyeSil/@uye.UserId" class="btn btn-danger modalAc" data-username="@uye.UserName" data-id="@uye.UserId">Sil</a></td>*@
             </tr>
+
         }
+        @Html.PagedListPager((IPagedList)Model,page=>Url.Action("Uyeler",new { page} ))
 
     </tbody>
 </table>

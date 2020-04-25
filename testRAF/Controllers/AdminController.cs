@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using testRAF.App_Classes;
 using testRAF.Models.Entity;
 using testRAF.ViewModels;
+using PagedList;
 namespace testRAF.Controllers
 {
     [Authorize(Roles = "A")]
@@ -21,9 +22,9 @@ namespace testRAF.Controllers
         {
             return View();
         }
-        public ActionResult Uyeler()
+        public ActionResult Uyeler(int page=1)
         {
-            var model = lr.Users.ToList();
+            var model = lr.Users.ToList().ToPagedList(page,10);
             return View(model);
         }
 
@@ -92,25 +93,25 @@ namespace testRAF.Controllers
                 int orta_w = Convert.ToInt32(ConfigurationManager.AppSettings["mw"].ToString());
                 int orta_h = Convert.ToInt32(ConfigurationManager.AppSettings["mh"].ToString());
 
-                int buyuk_w = Convert.ToInt32(ConfigurationManager.AppSettings["hw"].ToString());
-                int buyuk_h = Convert.ToInt32(ConfigurationManager.AppSettings["hh"].ToString());
+                //int buyuk_w = Convert.ToInt32(ConfigurationManager.AppSettings["hw"].ToString());
+                //int buyuk_h = Convert.ToInt32(ConfigurationManager.AppSettings["hh"].ToString());
 
                 string ortayol = "/src/img/listeler/ortayol/" + Guid.NewGuid() +
                 Path.GetExtension(fileUpload.FileName);
 
-                string buyukyol = "/src/img/listeler/buyukyol/" + Guid.NewGuid() +
-                Path.GetExtension(fileUpload.FileName);
+                //string buyukyol = "/src/img/listeler/buyukyol/" + Guid.NewGuid() +
+                //Path.GetExtension(fileUpload.FileName);
 
 
                 Bitmap o_bm = new Bitmap(img, orta_w, orta_h);
                 o_bm.Save(Server.MapPath(ortayol));
-                Bitmap b_bm = new Bitmap(img, buyuk_w, buyuk_h);
-                b_bm.Save(Server.MapPath(buyukyol));
+                //Bitmap b_bm = new Bitmap(img, buyuk_w, buyuk_h);
+                //b_bm.Save(Server.MapPath(buyukyol));
 
 
                 listeResim lresim = new listeResim();
                 lresim.ListeOrtaYol = ortayol;
-                lresim.ListeBuyukYol = buyukyol;
+                //lresim.ListeBuyukYol = buyukyol;
                 lr.listeResims.Add(lresim);
                 lr.SaveChanges();
 
@@ -128,9 +129,9 @@ namespace testRAF.Controllers
         }
 
 
-        public ActionResult Yorumlar()
+        public ActionResult Yorumlar(int? page)
         {
-            var model = lr.Yorumlars.ToList();
+            var model = lr.Yorumlars.OrderByDescending(x => x.YorumId).ToList().ToPagedList(page ?? 1, 10);
             return View(model);
         }
 

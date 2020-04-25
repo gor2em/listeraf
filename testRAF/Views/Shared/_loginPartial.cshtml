@@ -10,14 +10,14 @@ else
 <ul class="nav navbar-nav">
     @if (User.IsInRole("A"))
     {
-        <li class="btn-danger">@Html.ActionLink("panel", "Index", "Admin")</li>
+        <li class="btn-danger" style="height:5px;">@Html.ActionLink("panel", "Index", "Admin")</li>
     }
 
     <li class="hidden"><a href="" class="takeUserId">@Session["UserId"]</a></li>
     <li class="loginUser">@Html.ActionLink("" + Session["UserName"] + "", "Profil/" + Session["UserId"], "User")</li>
     @*<li class="loginUser"><a href="/User/Profil/@Session["UserId"]">@Session["UserName"]</a></li>*@
     @*<li class="loginUser">@Html.ActionLink("Hoşgeldin",Session["UserName"], "Index", "Home", null, null, null, null, new { @class = "UN", data_UserName = ""+ Session["UserName"] + "", name = "" + Session["UserName"] + "" })</li>*@
-    <li class="loginUser">@Html.ActionLink("Çıkış Yap", "Logout", "Account", null, null, null, null, new { data_toggle = "modal" })</li>
+    <li class="logout">@Html.ActionLink("çıkış yap", "Logout", "Account", null, null, null, null, new { data_toggle = "modal" })</li>
 </ul>
 }
 

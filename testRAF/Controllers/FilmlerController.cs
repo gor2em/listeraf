@@ -11,6 +11,8 @@ using testRAF.Models;
 using testRAF.Class;
 using testRAF.Models.Entity;
 using testRAF.ViewModels;
+using System.Web.Script.Serialization;
+using Newtonsoft.Json.Linq;
 
 namespace testRAF.Controllers
 {
@@ -49,7 +51,7 @@ namespace testRAF.Controllers
 
             /*Calling API https://developers.themoviedb.org/3/movie/top_rated */
             string apiKey = "a64ffa7c8877a661d43e9a9c0896f2c8";
-            HttpWebRequest apiRequest = WebRequest.Create("https://api.themoviedb.org/3/movie/top_rated?api_key=" + apiKey + "&language=tr&query=" + movieName + "&page=" + pageNo + "&include_adult=false") as HttpWebRequest;
+            HttpWebRequest apiRequest = WebRequest.Create("https://api.themoviedb.org/3/movie/top_rated?api_key=" + apiKey + "&language=tr&region=tr&query=" + movieName + "&page=" + pageNo + "&include_adult=false") as HttpWebRequest;
 
             string apiResponse = "";
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3
@@ -83,8 +85,11 @@ namespace testRAF.Controllers
             pagingInfo.ItemsPerPage = pageSize;
             ViewBag.Paging = pagingInfo;
         }
-        public ActionResult Detay(int id, Yorumlar y, Filmler fl,filmResim fresim)
+        
+        [HttpGet]
+        public ActionResult Detay(int id, Yorumlar y, Filmler fl, filmResim fresim, string imdb_id)
         {
+
 
             /*Calling API https://developers.themoviedb.org/3/people */
             string apiKey = "a64ffa7c8877a661d43e9a9c0896f2c8";
@@ -98,9 +103,11 @@ namespace testRAF.Controllers
             }
             /*End*/
 
-            /*http://json2csharp.com*/
+
             ResponseMovies rootObject = JsonConvert.DeserializeObject<ResponseMovies>(apiResponse);
             TheMovieDb theMovieDb = new TheMovieDb();
+            genres g = new genres();
+
             testViewModel finalModel = new testViewModel();
 
             theMovieDb.id = rootObject.id;
@@ -110,6 +117,22 @@ namespace testRAF.Controllers
             theMovieDb.overview = rootObject.overview;
             theMovieDb.release_date = rootObject.release_date;
             theMovieDb.original_title = rootObject.original_title;
+            //theMovieDb.g_name = string.Join(",", rootObject.genres);
+            object[] genres = new object[] { rootObject.genres };
+   
+            //var jObject = JObject.Parse(genres);
+            //jObject["name"] = JsonConvert.SerializeObject(jObject["name"].ToObject<string[]>());
+
+            //var result = JsonConvert.DeserializeObject<Dictionary<string, string>>(jObject.ToString());
+            //object[] genres = new object[] { rootObject.genres };
+
+            //for (int i = 0; i < genres.Length; i++)
+            //    g.name = genres[i].ToString();
+
+
+            //g.name = string.Join(",", genres);
+
+
             theMovieDb.poster_path = rootObject.poster_path == null ? Url.Content("~/Content/Image/no-image.png") : "https://image.tmdb.org/t/p/w500/" + rootObject.poster_path;
 
             var model = lr.Yorumlars.Where(x => x.imdb_id == theMovieDb.imdb_id && x.durum == true).ToList();
@@ -136,24 +159,19 @@ namespace testRAF.Controllers
                 lr.filmResims.Add(fresim);
                 lr.SaveChanges();
             }
+            //int userId = lr.Users.FirstOrDefault(x => x.UserName == User.Identity.Name).UserId;
+            //i.UserId = userId;
 
-
-            //var kontrolYorum = lr.Yorumlars.Any(x => x.durum==true);
-            //if (kontrolYorum)
-            //{
-            //    model.ToList();
-            //}
-            //else
-            //{
-            //    model = null;
-            //}
+            //finalModel.iz = i;
+            //finalModel.iz.id = id;
             finalModel.filmler_list = flist;
             finalModel.Yorumlar = model;
             finalModel.Filmler = theMovieDb;
 
-
             return View("Detay", finalModel);
         }
+
+
 
 
         //puan
@@ -166,11 +184,19 @@ namespace testRAF.Controllers
         }
 
         [HttpPost]
-        public string Izlediklerim(izlenenler i, uDetay ud,Filmler fl)
+        public string Izlediklerim(izlenenler i, uDetay ud, Filmler fl,string imdb_id)
         {
             var kontrolId = lr.izlenenlers.Any(x => x.imdb_id == i.imdb_id && x.UserId == i.UserId);
             if (kontrolId)
             {
+                var izBul = lr.uDetays.Find(ud.UserId);
+                izlenenler iz = lr.izlenenlers.FirstOrDefault(x => x.imdb_id == imdb_id && x.UserId == ud.UserId);
+                lr.izlenenlers.Remove(iz);
+                var topIzlenen = izBul.topIzlenen--;
+
+                Filmler f = lr.Filmlers.FirstOrDefault(z => z.imdb_id == imdb_id);
+                var a = f.izlenme--;
+                lr.SaveChanges();
                 return "true";
             }
             else
@@ -195,11 +221,19 @@ namespace testRAF.Controllers
         }
 
         [HttpPost]
-        public string Begendiklerim(begenilenler b, uDetay ud,Filmler fl)
+        public string Begendiklerim(begenilenler b, uDetay ud, Filmler fl,string imdb_id)
         {
             var kontrolId = lr.begenilenlers.Any(x => x.imdb_id == b.imdb_id && x.UserId == b.UserId);
             if (kontrolId)
             {
+                var izBul = lr.uDetays.Find(ud.UserId);
+                begenilenler be = lr.begenilenlers.FirstOrDefault(x => x.imdb_id == imdb_id && x.UserId == ud.UserId);
+                lr.begenilenlers.Remove(be);
+                var topIzlenen = izBul.topBegenilen--;
+
+                Filmler f = lr.Filmlers.FirstOrDefault(z => z.imdb_id == imdb_id);
+                var a = f.begenme--;
+                lr.SaveChanges();
                 return "true";
             }
             else
@@ -218,11 +252,19 @@ namespace testRAF.Controllers
         }
 
         [HttpPost]
-        public string DahaSonraIzle(dahasonraizle dhs, uDetay ud,Filmler fl)
+        public string DahaSonraIzle(dahasonraizle dhs, uDetay ud, Filmler fl,string imdb_id)
         {
             var kontrolId = lr.dahasonraizles.Any(x => x.imdb_id == dhs.imdb_id && x.UserId == dhs.UserId);
             if (kontrolId)
             {
+                var izBul = lr.uDetays.Find(ud.UserId);
+                dahasonraizle d_h_s = lr.dahasonraizles.FirstOrDefault(x => x.imdb_id == imdb_id && x.UserId == ud.UserId);
+                lr.dahasonraizles.Remove(d_h_s);
+                var topIzlenen = izBul.topDahaSonraIzle--;
+
+                Filmler f = lr.Filmlers.FirstOrDefault(z => z.imdb_id == imdb_id);
+                var a = f.dahasonraizle--;
+                lr.SaveChanges();
                 return "true";
             }
             else
@@ -241,7 +283,7 @@ namespace testRAF.Controllers
         }
 
         [HttpPost]
-        public string YorumEkle(Yorumlar y, uDetay ud,Filmler fl)
+        public string YorumEkle(Yorumlar y, uDetay ud, Filmler fl)
         {
 
             if (y.YorumIcerik != null)

@@ -1,7 +1,4 @@
-﻿
-
-$(function () {
-
+﻿$(function () {
     //menu bg
     $(window).scroll(function () {
         if ($(this).scrollTop() > 50)

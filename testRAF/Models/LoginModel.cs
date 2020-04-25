@@ -10,12 +10,16 @@ namespace testRAF.Models
     {
 
         public int UserId { get; set; }
-
-        [Display(Name ="Kullanıcı Adı")]
-        [Required(ErrorMessage ="Kullanıcı adınızı giriniz*")]
         public string UserName { get; set; }
 
-        [Display(Name ="Şifre")]
+        [RegularExpression(@"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$", ErrorMessage = "Email adresi bulunamadı.")]
+        [DataType(DataType.EmailAddress, ErrorMessage = "Geçerli bir mail giriniz!")]
+        [Display(Name = "Email")]
+        [Required(AllowEmptyStrings = false, ErrorMessage = "Email alanı boş bırakılamaz*")]
+        public string Email { get; set; }
+
+
+        [Display(Name = "Şifre")]
         [Required(ErrorMessage ="Şifrenizi giriniz*")]
         [DataType(DataType.Password)]
         public string Password { get; set; }

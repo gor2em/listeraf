@@ -1,4 +1,8 @@
 ﻿@model testRAF.ViewModels.testViewModel
+@using testRAF.Models.Entity;
+@{
+    ViewBag.Title = "Listeraf / " + Model.Filmler.title;
+}
 <style>
     .thumbnail i {
         font-size: 25px;
@@ -46,26 +50,73 @@
         <div class="col-md-3 text-center" style="border-right:1px solid #757575">
             <img src="@Model.Filmler.poster_path" class="img-responsive img-detail center-block take-pp" data-poster_path="@Model.Filmler.poster_path" />
             <br />
-            <div class="icons" data-imdb_id="@Model.Filmler.imdb_id" name="@Model.Filmler.imdb_id" data-id="@Model.Filmler.id">
-                <span class="col-md-6">
-                    <a href="#" class="uWatched" data-toggle="modal" data-target="#basicModal"><i class="fas fa-eye"></i></a>
-                    <p>İzledim</p>
-                </span>
 
-                <span class="col-md-6">
-                    <a href="#" class="uLiked" data-toggle="modal" data-target="#basicModal"><i class="fas fa-heart"></i></a>
-                    <p>Beğendim</p>
-                </span>
-                <span class="col-md-6">
-                    <a href="#" class="uWLater" data-toggle="modal" data-target="#basicModal"><i class="fas fa-plus"></i></a>
-                    <p>Daha sonra izle</p>
-                </span>
+
+            <div class="icons" data-imdb_id="@Model.Filmler.imdb_id" name="@Model.Filmler.imdb_id" data-id="@Model.Filmler.id">
+                @*@if (Model.iz.id == Model.Filmler.id && Model.iz.UserId == Convert.ToInt32(Session["UserId"]))*@
+
+                @{
+                    listerafDBEntities4 lr = new listerafDBEntities4();
+                    int userid = Convert.ToInt32(Session["UserId"]);
+                    var iz = lr.izlenenlers.Any(x => x.id == Model.Filmler.id && x.UserId == userid);
+                    var be = lr.begenilenlers.Any(x => x.id == Model.Filmler.id && x.UserId == userid);
+                    var dhs = lr.dahasonraizles.Any(x => x.id == Model.Filmler.id && x.UserId == userid);
+
+                    if (iz)
+                    {
+                        <span class="col-md-6">
+                            <a href="#" class="uWatched"><i class="fas fa-eye" style="color:#11df5b"></i></a>
+                            <p>İzledim</p>
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="col-md-6">
+                            <a href="#" class="uWatched"><i class="fas fa-eye"></i></a>
+                            <p>İzledim</p>
+                        </span>
+                    }
+                    if (be)
+                    {
+                        <span class="col-md-6">
+                            <a href="#" class="uLiked"><i class="fas fa-heart" style="color:#fa2e12"></i></a>
+                            <p>Beğendim</p>
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="col-md-6">
+                            <a href="#" class="uLiked"><i class="fas fa-heart"></i></a>
+                            <p>Beğendim</p>
+                        </span>
+                    }
+
+                    if (dhs)
+                    {
+                        <span class="col-md-6">
+                            <a href="#" class="uWLater"><i class="fas fa-plus" style="color:#fa6c23"></i></a>
+                            <p>Daha sonra izle</p>
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="col-md-6">
+                            <a href="#" class="uWLater"><i class="fas fa-plus"></i></a>
+                            <p>Daha sonra izle</p>
+                        </span>
+
+                    }
+                }
                 <span class="col-md-6">
                     <a href="#" class="yorumYap"><i class="fas fa-comment"></i></a>
                     <p>Yorum yap</p>
                 </span>
             </div>
-            <br /><br /><br /><br />
+
+
+
+
+            <br /><br /><br /><br /><br />
             <hr />
             <div class="icons">
                 <h2>İstatistik</h2>
@@ -83,11 +134,11 @@
                             <p>@fl.begenme</p>
                         </span>
                         <span class="col-md-3">
-                            <i class="fas fa-plus"></i>
+                            <i class="fas fa-plus" style="color:#fa6c23"></i>
                             <p>@fl.dahasonraizle</p>
                         </span>
                         <span class="col-md-3">
-                            <i class="fas fa-comment"></i>
+                            <i class="fas fa-comment" style="color:#ccc"></i>
                             <p>@fl.yorumlar</p>
                         </span>
                     }
@@ -109,13 +160,15 @@
                 <div class="col-md-12">
                     <hr />
                     <p class="text-justify">@Model.Filmler.overview</p>
+                    <h5>@Model.Filmler.g_name</h5>
+                    @*<h5>@Model.g.g.name</h5>*@
                 </div>
 
                 <div class="col-md-12">
                     <br /><br /><br /><br />
                     <h2>Yorum Yap</h2>
                     <input type="text" placeholder="Yorum yapmak için tıklayın..." class="detail-comment" />
-                    <input type="submit" value="Gönder" class="btn btn-default pull-right yorumEkle" data-toggle="modal" data-target="#basicModal" />
+                    <input type="submit" value="Gönder" class="mDetay-buton pull-right yorumEkle" data-toggle="modal" data-target="#basicModal" />
                 </div>
 
 
@@ -141,7 +194,7 @@
                             <tr>
 
                                 <td class="col-md-10" style="text-align:justify;">
-                                    <p style="border-bottom:1px solid #757575;color:#ededed;">@yorum.YorumIcerik</p>
+                                    <p class="m-comments">@yorum.YorumIcerik</p>
                                 </td>
 
                                 <td class="col-md-2">
@@ -183,6 +236,27 @@
             }, 1000);
         });
 
+        //$(document).load(function () {
+        //    $.ajax({
+        //        type:"GET",
+        //        url:"/Filmler/Detay",
+        //        data: { UserId: UserId, imdb_id: imdb_id},
+        //        success: function (durum) {
+        //            if (durum == "true") {
+
+        //            }
+        //            else {
+
+        //                $(".uWatched i").css("color", "#11df5b");
+
+        //            }
+        //        }
+
+        //    })
+        //});
+
+
+
 
         $(document).on("click", ".uWatched", function () {
             $.ajax({
@@ -191,11 +265,9 @@
                 data: { UserId: UserId, imdb_id: imdb_id, title: title, poster_path: poster_path, id: id, tid: tid },
                 success: function (durum) {
                     if (durum == "true") {
-                        $(".modal-header h4").html("<b>" + title + "</b>" + "  izlediklerim rafınızda bulunuyor.");
+                        $(".uWatched i").css("color", "#757575");
                     }
                     else {
-
-                        $(".modal-header h4").html(title + "  izlediklerim rafınıza eklendi.");
                         $(".uWatched i").css("color", "#11df5b");
                     }
 
@@ -207,13 +279,13 @@
             $.ajax({
                 type: "post",
                 url: "/Filmler/Begendiklerim/",
-                data: { UserId: UserId, imdb_id: imdb_id, title: title, poster_path: poster_path, id: id, tid: tid},
+                data: { UserId: UserId, imdb_id: imdb_id, title: title, poster_path: poster_path, id: id, tid: tid },
                 success: function (durum) {
                     if (durum == "true") {
-                        $(".modal-header h4").html("<b>" + title + "</b>" + "  listenizde bulunuyor.");
+                        $(".uLiked i").css("color", "#757575");
                     }
                     else {
-                        $(".modal-header h4").html(title + "  listenize eklendi.");
+                        $(".uLiked i").css("color", "#fa2e12");
                     }
 
                     //window.location.replace("/Filmler/Index");
@@ -227,10 +299,11 @@
                 data: { UserId: UserId, imdb_id: imdb_id, title: title, poster_path: poster_path, id: id, tid: tid },
                 success: function (durum) {
                     if (durum == "true") {
-                        $(".modal-header h4").html("<b>" + title + "</b>" + "   izleme listenizde bulunuyor.");
+                        $(".uWLater i").css("color", "#757575");
                     }
                     else {
-                        $(".modal-header h4").html(title + "  izleme listenize eklendi.");
+                        
+                        $(".uWLater i").css("color", "#fa6c23");
                     }
 
                     //window.location.replace("/Filmler/Index");

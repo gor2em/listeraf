@@ -7,10 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
-
 using testRAF.Models;
 using testRAF.Models.Entity;
 using testRAF.ViewModels;
+using PagedList;
 
 namespace testRAF.Controllers
 {
@@ -72,20 +72,8 @@ namespace testRAF.Controllers
                     }
 
                 }
-
                 ViewBag.Rutbe = sb.ToString();
-
-
             }
-
-            //var b = lr.begenilenlers.Where(x => x.UserId == id).ToList();
-            //var dhs = lr.dahasonraizles.Where(x=>x.UserId==id).ToList();
-            //var y = lr.Yorumlars.Where(x => x.UserId == id).ToList();
-
-            ////MVW.izlediklerim = i;
-            //MVW.begendiklerim = b;
-            //MVW.dahasonraizle = dhs;
-            //MVW.yorumlarim = y;
             MVW.udetay = ud;
             MVW.UD = detaylar;
             MVW.user = model;
@@ -131,7 +119,7 @@ namespace testRAF.Controllers
         }
         public JsonResult Izlediklerim(int id,Filmler fl)
         {
-            
+            //var veriler = lr.izlenenlers.Where(x => x.UserId == id).ToList().ToPagedList(page??1,36);
             var veriler = lr.izlenenlers.Where(x => x.UserId == id).ToList();
             return Json(
                 new
@@ -139,7 +127,6 @@ namespace testRAF.Controllers
                     Result = from obj in veriler
                              select new
                              {
-                               
                                  obj.id,
                                  obj.title,
                                  obj.poster_path,
@@ -158,7 +145,6 @@ namespace testRAF.Controllers
                     Result = from obj in veriler
                              select new
                              {
-
                                  obj.id,
                                  obj.title,
                                  obj.poster_path,

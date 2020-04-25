@@ -9,7 +9,7 @@
     }
         .inside:hover img{
             transition-duration:0.2s;
-            -webkit-filter: brightness(20%);
+            -webkit-filter: brightness(70%);
             cursor:pointer;
         }
 .bottom-left p {

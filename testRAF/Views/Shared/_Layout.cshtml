@@ -1,16 +1,23 @@
 ﻿
 <!DOCTYPE html>
-<html>
+<html lang="tr">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
+    <link href="~/l1.png" rel="shortcut icon" type="image/x-icon" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/animsition.min.css">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Content/main.css")
     @Styles.Render("~/Content/images.css")
     @Styles.Render("~/Content/color.css")
+    @Styles.Render("~/Content/tag.css")
     @RenderSection("style", false)
 </head>
 <body>
@@ -27,16 +34,16 @@
                 <a href='@Url.Action("Index","Home")'>
                     <img src='@Url.Content("~/src/img/logo/logo.png")' />
                 </a>
-                <input class="my-input" type="text" placeholder="Bir şeyler arayın...">
+                @*<input class="my-input" id="searchInput" type="text" name="searchInput" placeholder="Bir şeyler arayın...">*@
             </div>
 
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("filmler", "Index", "Filmler")</li>
                     @*<li>@Html.ActionLink("filmler", "Index", "Filmler")</li>*@
-                    <li>@Html.ActionLink("diziler", "Index", "Home")</li>
+                    <li>@Html.ActionLink("diziler", "Index", "Diziler")</li>
                     <li>@Html.ActionLink("listeler", "", "Listeler")</li>
-                    <li>
+                    <li class="disabled">
                         @Html.ActionLink("türler", "Index", "Home")
                         <ul>
                             <li><a href="#">Aksiyon</a></li>
@@ -101,36 +108,44 @@
 
 
 
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="https://kit.fontawesome.com/7b87b7f8b4.js" crossorigin="anonymous"></script>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/Scripts/main.js")
     @RenderSection("scripts", false)
-    <script type='text/javascript'>
-        $(document).ready(function () {
-
-            /* Every time the window is scrolled ... */
+    <script type="text/javascript" charset="utf-8">
+        $(function () {
+            $(this).scrollTop(0);
             $(window).scroll(function () {
-
-                /* Check the location of each desired element */
-                $('.hideme').each(function (i) {
-
-                    var bottom_of_object = $(this).offset().top + $(this).outerHeight();
-                    var bottom_of_window = $(window).scrollTop() + $(window).height();
-
-                    /* If the object is completely visible in the window, fade it it */
-                    if (bottom_of_window > bottom_of_object) {
-
-                        $(this).animate({ 'opacity': '1' }, 300);
-
+                $('.lazy').each(function () {
+                    if ($(this).offset().top < ($(window).scrollTop() + $(window).height() + 100)) {
+                        $(this).attr('src', $(this).attr('data-src'));
                     }
-
                 });
-
             });
+        });
+        $(function () {
+            /* Every time the window is scrolled ... */
+             $(window).scroll(function () {
 
+                 /* Check the location of each desired element */
+                 $('.hideme').each(function (i) {
+
+                     var bottom_of_object = $(this).offset().top + $(this).outerHeight();
+                     var bottom_of_window = $(window).scrollTop() + $(window).height();
+
+                     /* If the object is completely visible in the window, fade it it */
+                     if (bottom_of_window > bottom_of_object) {
+
+                         $(this).animate({ 'opacity': '1' }, 100);
+
+                     }
+
+                 });
+
+             });
         });
     </script>
-    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
-    <script src="https://kit.fontawesome.com/7b87b7f8b4.js" crossorigin="anonymous"></script>
 </body>
 </html>

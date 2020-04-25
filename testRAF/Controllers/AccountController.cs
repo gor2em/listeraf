@@ -86,14 +86,13 @@ namespace testRAF.Controllers
         {
             if (ModelState.IsValid)
             {
-                var logUser = objUserDBEntities.Users.FirstOrDefault(x => x.UserName == objLoginModel.UserName.ToLower() && x.Password == objLoginModel.Password);
+                var logUser = objUserDBEntities.Users.FirstOrDefault(x => x.Email == objLoginModel.Email.ToLower() && x.Password == objLoginModel.Password);
                 if (logUser != null)
                 {
-                    FormsAuthentication.SetAuthCookie(logUser.UserName, false);//kullanıcı sisteme kabul edildi -- auth oldu
-                    Session["UserName"] = objLoginModel.UserName.ToLower();
+                    FormsAuthentication.SetAuthCookie(logUser.Email, false);//kullanıcı sisteme kabul edildi -- auth oldu
+                    Session["UserName"] = logUser.UserName;
                     Session["UserId"] = logUser.UserId;
                     ViewBag.userid = Session["UserId"];
-
 
                     if (logUser.RolId == 2)
                        return RedirectToAction("Index", "Admin",MVW);
@@ -102,10 +101,9 @@ namespace testRAF.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("Error", "Geçersiz kullanıcı adı veya şifre!");
+                    ModelState.AddModelError("Error", "Geçersiz email veya şifre!");
                     return View();
                 }
-
             }
             return View();
         }
